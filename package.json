@@ -14,8 +14,8 @@
   "keywords": [
     "react-native"
   ],
-  "author": "",
-  "license": "",
+  "author": "ibitcy",
+  "license": "ISC",
   "devDependencies": {
     "typescript": "^3.0.0"
   },
@@ -26,5 +26,13 @@
     "@types/react": "^16.9.11",
     "react": "^16.11.0",
     "react-native": ">=0.60.5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ibitcy/react-native-hole-view.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ibitcy/react-native-hole-view/issues"
+  },
+  "homepage": "https://github.com/ibitcy/react-native-hole-view#readme"
 }
