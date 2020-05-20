@@ -8,10 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
+@interface RNHoleViewHole : NSObject
 
-@interface RNHoleView : UIView
+@property (nonatomic) CGRect rect;
+@property (nonatomic) CGFloat cornerRadius;
+
+- (instancetype)initWitnX:(CGFloat)x y:(CGFloat)y width:(CGFloat)width height:(CGFloat)height andCornerRadius:(CGFloat)cornerRadius;
 
 @end
 
-NS_ASSUME_NONNULL_END
+@interface RNHoleView : UIView
+
+@property (nonatomic) NSArray <RNHoleViewHole*> *holes;
+
+@end

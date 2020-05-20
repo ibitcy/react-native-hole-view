@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26050257390D9EFAC0C42042 /* libPods-RNHoleViewProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 589B5249A3A6328D09479D22 /* libPods-RNHoleViewProject.a */; };
 		799864A4247542C700269E76 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 799864A3247542C700269E76 /* AppDelegate.m */; };
 		799864A7247542C700269E76 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 799864A6247542C700269E76 /* SceneDelegate.m */; };
 		799864AA247542C700269E76 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799864A9247542C700269E76 /* ViewController.m */; };
@@ -14,10 +15,10 @@
 		799864AF247542C900269E76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 799864AE247542C900269E76 /* Assets.xcassets */; };
 		799864B2247542C900269E76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 799864B0247542C900269E76 /* LaunchScreen.storyboard */; };
 		799864B5247542C900269E76 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 799864B4247542C900269E76 /* main.m */; };
-		F67F31B7689C970AFE3D3779 /* Pods_RNHoleViewProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A08F6E49A0738915A643DA92 /* Pods_RNHoleViewProject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		589B5249A3A6328D09479D22 /* libPods-RNHoleViewProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RNHoleViewProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		70A4788B720C6B37715B25FB /* Pods-RNHoleViewProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNHoleViewProject.debug.xcconfig"; path = "Target Support Files/Pods-RNHoleViewProject/Pods-RNHoleViewProject.debug.xcconfig"; sourceTree = "<group>"; };
 		7998649F247542C700269E76 /* RNHoleViewProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RNHoleViewProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		799864A2247542C700269E76 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -31,7 +32,6 @@
 		799864B1247542C900269E76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		799864B3247542C900269E76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		799864B4247542C900269E76 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		A08F6E49A0738915A643DA92 /* Pods_RNHoleViewProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RNHoleViewProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B70B4F1EC5E35BC277E4F723 /* Pods-RNHoleViewProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNHoleViewProject.release.xcconfig"; path = "Target Support Files/Pods-RNHoleViewProject/Pods-RNHoleViewProject.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -40,7 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F67F31B7689C970AFE3D3779 /* Pods_RNHoleViewProject.framework in Frameworks */,
+				26050257390D9EFAC0C42042 /* libPods-RNHoleViewProject.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,7 +50,7 @@
 		2F26CF890EE60C978FD3E950 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A08F6E49A0738915A643DA92 /* Pods_RNHoleViewProject.framework */,
+				589B5249A3A6328D09479D22 /* libPods-RNHoleViewProject.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

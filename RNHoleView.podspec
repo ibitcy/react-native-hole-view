@@ -13,7 +13,8 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "9.0"
   s.source       = { :git => "https://github.com/ibitcy/react-native-hole-view", :tag => "master" }
   s.source_files = "ios/src/*.{h,m}"
-
+#	s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
+	
   s.dependency 'React'
 end
 
