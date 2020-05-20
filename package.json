@@ -1,6 +1,6 @@
 {
   "name": "react-native-hole-view",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Component to made an overlay with touch-through hole",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
