@@ -9,7 +9,7 @@ export interface IRNHole {
   width: number;
   height: number;
   cornerRadius?: number;
-}2
+}
 
 export interface IRNHoleView extends ViewProps {
   holes?: IRNHole[];
