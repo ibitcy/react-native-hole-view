@@ -1,7 +1,7 @@
-import { NativeModules, requireNativeComponent } from 'react-native';
+import { requireNativeComponent, View, ViewProps } from 'react-native';
 import * as React from 'react';
 
-const RNHoleViewManager = requireNativeComponent('RNHoleViewManager');
+const RNHoleViewManager = requireNativeComponent('RNHoleView');
 
 export interface IRNHole {
   x: number;
@@ -9,12 +9,12 @@ export interface IRNHole {
   width: number;
   height: number;
   cornerRadius?: number;
-}
+}2
 
-export interface IRNHoleView {
-  holes?: IRNHole;
+export interface IRNHoleView extends ViewProps {
+  holes?: IRNHole[];
 }
 
 export const RNHoleView: React.FC<IRNHoleView> = props => {
-  return <RNHoleViewManager {...this.props} />;
+  return <RNHoleViewManager {...props} />;
 };
