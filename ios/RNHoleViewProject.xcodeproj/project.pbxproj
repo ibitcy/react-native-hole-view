@@ -1,0 +1,397 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		799864A4247542C700269E76 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 799864A3247542C700269E76 /* AppDelegate.m */; };
+		799864A7247542C700269E76 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 799864A6247542C700269E76 /* SceneDelegate.m */; };
+		799864AA247542C700269E76 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 799864A9247542C700269E76 /* ViewController.m */; };
+		799864AD247542C700269E76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 799864AB247542C700269E76 /* Main.storyboard */; };
+		799864AF247542C900269E76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 799864AE247542C900269E76 /* Assets.xcassets */; };
+		799864B2247542C900269E76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 799864B0247542C900269E76 /* LaunchScreen.storyboard */; };
+		799864B5247542C900269E76 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 799864B4247542C900269E76 /* main.m */; };
+		F67F31B7689C970AFE3D3779 /* Pods_RNHoleViewProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A08F6E49A0738915A643DA92 /* Pods_RNHoleViewProject.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		70A4788B720C6B37715B25FB /* Pods-RNHoleViewProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNHoleViewProject.debug.xcconfig"; path = "Target Support Files/Pods-RNHoleViewProject/Pods-RNHoleViewProject.debug.xcconfig"; sourceTree = "<group>"; };
+		7998649F247542C700269E76 /* RNHoleViewProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RNHoleViewProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		799864A2247542C700269E76 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		799864A3247542C700269E76 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		799864A5247542C700269E76 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		799864A6247542C700269E76 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		799864A8247542C700269E76 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		799864A9247542C700269E76 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		799864AC247542C700269E76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		799864AE247542C900269E76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		799864B1247542C900269E76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		799864B3247542C900269E76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		799864B4247542C900269E76 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A08F6E49A0738915A643DA92 /* Pods_RNHoleViewProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RNHoleViewProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B70B4F1EC5E35BC277E4F723 /* Pods-RNHoleViewProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RNHoleViewProject.release.xcconfig"; path = "Target Support Files/Pods-RNHoleViewProject/Pods-RNHoleViewProject.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7998649C247542C700269E76 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F67F31B7689C970AFE3D3779 /* Pods_RNHoleViewProject.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2F26CF890EE60C978FD3E950 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A08F6E49A0738915A643DA92 /* Pods_RNHoleViewProject.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		79986496247542C700269E76 = {
+			isa = PBXGroup;
+			children = (
+				799864A1247542C700269E76 /* RNHoleViewProject */,
+				799864A0247542C700269E76 /* Products */,
+				DFE2D25C88B376E98FAD7B3A /* Pods */,
+				2F26CF890EE60C978FD3E950 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		799864A0247542C700269E76 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7998649F247542C700269E76 /* RNHoleViewProject.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		799864A1247542C700269E76 /* RNHoleViewProject */ = {
+			isa = PBXGroup;
+			children = (
+				799864A2247542C700269E76 /* AppDelegate.h */,
+				799864A3247542C700269E76 /* AppDelegate.m */,
+				799864A5247542C700269E76 /* SceneDelegate.h */,
+				799864A6247542C700269E76 /* SceneDelegate.m */,
+				799864A8247542C700269E76 /* ViewController.h */,
+				799864A9247542C700269E76 /* ViewController.m */,
+				799864AB247542C700269E76 /* Main.storyboard */,
+				799864AE247542C900269E76 /* Assets.xcassets */,
+				799864B0247542C900269E76 /* LaunchScreen.storyboard */,
+				799864B3247542C900269E76 /* Info.plist */,
+				799864B4247542C900269E76 /* main.m */,
+			);
+			path = RNHoleViewProject;
+			sourceTree = "<group>";
+		};
+		DFE2D25C88B376E98FAD7B3A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				70A4788B720C6B37715B25FB /* Pods-RNHoleViewProject.debug.xcconfig */,
+				B70B4F1EC5E35BC277E4F723 /* Pods-RNHoleViewProject.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7998649E247542C700269E76 /* RNHoleViewProject */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 799864CE247542C900269E76 /* Build configuration list for PBXNativeTarget "RNHoleViewProject" */;
+			buildPhases = (
+				32E2E11F69025C8E09A986ED /* [CP] Check Pods Manifest.lock */,
+				7998649B247542C700269E76 /* Sources */,
+				7998649C247542C700269E76 /* Frameworks */,
+				7998649D247542C700269E76 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RNHoleViewProject;
+			productName = RNHoleViewProject;
+			productReference = 7998649F247542C700269E76 /* RNHoleViewProject.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		79986497247542C700269E76 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = "Stepan Kopylov";
+				TargetAttributes = {
+					7998649E247542C700269E76 = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 7998649A247542C700269E76 /* Build configuration list for PBXProject "RNHoleViewProject" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 79986496247542C700269E76;
+			productRefGroup = 799864A0247542C700269E76 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7998649E247542C700269E76 /* RNHoleViewProject */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7998649D247542C700269E76 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				799864B2247542C900269E76 /* LaunchScreen.storyboard in Resources */,
+				799864AF247542C900269E76 /* Assets.xcassets in Resources */,
+				799864AD247542C700269E76 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		32E2E11F69025C8E09A986ED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RNHoleViewProject-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7998649B247542C700269E76 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				799864AA247542C700269E76 /* ViewController.m in Sources */,
+				799864A4247542C700269E76 /* AppDelegate.m in Sources */,
+				799864B5247542C900269E76 /* main.m in Sources */,
+				799864A7247542C700269E76 /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		799864AB247542C700269E76 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				799864AC247542C700269E76 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		799864B0247542C900269E76 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				799864B1247542C900269E76 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		799864CC247542C900269E76 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		799864CD247542C900269E76 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		799864CF247542C900269E76 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 70A4788B720C6B37715B25FB /* Pods-RNHoleViewProject.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RNHoleViewProject/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ibit.RNHoleViewProject;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		799864D0247542C900269E76 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B70B4F1EC5E35BC277E4F723 /* Pods-RNHoleViewProject.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = RNHoleViewProject/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ibit.RNHoleViewProject;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7998649A247542C700269E76 /* Build configuration list for PBXProject "RNHoleViewProject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				799864CC247542C900269E76 /* Debug */,
+				799864CD247542C900269E76 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		799864CE247542C900269E76 /* Build configuration list for PBXNativeTarget "RNHoleViewProject" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				799864CF247542C900269E76 /* Debug */,
+				799864D0247542C900269E76 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 79986497247542C700269E76 /* Project object */;
+}

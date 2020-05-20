@@ -1,0 +1,30 @@
+{
+  "name": "react-native-hole-view",
+  "version": "0.0.1",
+  "description": "Component to made an overlay with touch-through hole",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://www.npmjs.com"
+  },
+  "scripts": {
+    "build": "rm -rf ./dist && tsc -p tsconfig.json",
+    "preversion": "npm run build"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "typescript": "^3.0.0"
+  },
+  "peerDependencies": {
+    "react-native": "*"
+  },
+  "dependencies": {
+    "@types/react": "^16.9.11",
+    "react": "^16.11.0",
+    "react-native": ">=0.60.5"
+  }
+}
