@@ -3,6 +3,8 @@
 Component to made an overlay with touch-through holes!
 You can use to make tutorials overlay.
 
+![Screenshot](misc/demo.gif)
+
 ## Getting started
 
 Install the library using either Yarn:
