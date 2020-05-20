@@ -23,8 +23,7 @@
     "react": "^16.11.0",
     "react-native": "^0.60.5"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ibitcy/react-native-hole-view.git"
