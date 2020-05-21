@@ -9,7 +9,8 @@
   },
   "scripts": {
     "build": "rm -rf ./dist && tsc -p tsconfig.json",
-    "preversion": "npm run build"
+    "preversion": "npm run build",
+    "prepare": "install-peers"
   },
   "files": [
     "android",
@@ -35,6 +36,7 @@
   "author": "ibitcy",
   "license": "ISC",
   "devDependencies": {
+    "install-peers-cli": "^2.2.0",
     "typescript": "^3.0.0"
   },
   "peerDependencies": {
