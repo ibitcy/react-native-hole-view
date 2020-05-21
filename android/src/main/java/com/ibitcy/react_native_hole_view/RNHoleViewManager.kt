@@ -1,11 +1,12 @@
 package com.ibitcy.react_native_hole_view
 
+import android.content.res.Resources
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableArray
-import com.facebook.react.uimanager.SimpleViewManager
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
+import kotlin.math.roundToInt
 
 class RNHoleViewManager(val reactContext: ReactApplicationContext): ViewGroupManager<RNHoleView>() {
 
@@ -18,24 +19,31 @@ class RNHoleViewManager(val reactContext: ReactApplicationContext): ViewGroupMan
     }
 
     @ReactProp(name = "holes")
-    fun setHoles(view: RNHoleView, holes: ReadableArray) {
-        if (holes.size() == 0) {
+    fun setHoles(view: RNHoleView, holesArg: ReadableArray) {
+        if (holesArg.size() == 0) {
             return
         }
 
-        for (i in 0 until holes.size()) {
-            val hole = holes.getMap(i)!!
-            val x = hole.getInt("x")
-            val y = hole.getInt("y")
-            val width = hole.getInt("width")
-            val height = hole.getInt("height")
+        val holes = mutableListOf<RNHoleView.Hole>()
+        for (i in 0 until holesArg.size()) {
+            val hole = holesArg.getMap(i)!!
+            val x = hole.getInt("x").dpToPx()
+            val y = hole.getInt("y").dpToPx()
+            val width = hole.getInt("width").dpToPx()
+            val height = hole.getInt("height").dpToPx()
             val borderRadius = try {
-                hole.getInt("borderRadius")
+                hole.getInt("borderRadius").dpToPx()
             } catch(e: Exception) {
                 0
             }
-            view.addHole(RNHoleView.Hole(x, y, width, height, borderRadius))
+            holes.add(RNHoleView.Hole(x, y, width, height, borderRadius))
         }
+        view.setHoles(holes)
+    }
 
+    private fun Int.dpToPx(): Int {
+        val metrics = Resources.getSystem().displayMetrics
+        val px = this * (metrics.densityDpi / 160f)
+        return px.roundToInt()
     }
 }
