@@ -3,7 +3,6 @@ package com.ibitcy.react_native_hole_view
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
@@ -54,25 +53,38 @@ class RNHoleView: FrameLayout {
         }
     }
 
+    private fun isTouchInsideHole(event: MotionEvent): Boolean {
+        if (holesPath == null)
+            return false
+        val clickableRegion = Region()
+        val rectF = RectF()
+        holesPath!!.computeBounds(rectF, true)
+        val rect = Rect(rectF.left.toInt(), rectF.top.toInt(), rectF.right.toInt(), rectF.bottom.toInt())
+        clickableRegion.setPath(holesPath!!, Region(rect))
+        return clickableRegion.contains(event.x.toInt(), event.y.toInt())
+    }
+
     override fun performClick(): Boolean {
-        super.performClick()
-        return false
+        return super.performClick()
     }
 
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        performClick()
-        return false
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        val inside = isTouchInsideHole(event)
+        if (inside) {
+            performClick()
+        }
+        return !inside
     }
 
-    override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
-        return false;
+    override fun onInterceptTouchEvent(event: MotionEvent): Boolean {
+        return !isTouchInsideHole(event)
     }
 
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
-        return false;
+    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
+        return !isTouchInsideHole(event)
     }
 
-    override fun onInterceptHoverEvent(event: MotionEvent?): Boolean {
-        return false;
+    override fun onInterceptHoverEvent(event: MotionEvent): Boolean {
+        return !isTouchInsideHole(event)
     }
 }
