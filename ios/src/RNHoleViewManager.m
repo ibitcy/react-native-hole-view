@@ -7,7 +7,7 @@
 //
 
 #import "RNHoleViewManager.h"
-#import "RNHoleViewWrapper.h"
+#import "RNHoleView.h"
 
 @implementation RNHoleViewManager
 
@@ -21,7 +21,7 @@ RCT_EXPORT_MODULE(RNHoleView)
 RCT_EXPORT_VIEW_PROPERTY(holes, NSArray)
 
 -(UIView*)view{
-    return [RNHoleViewWrapper new];
+    return [RNHoleView new];
 }
 
 @end

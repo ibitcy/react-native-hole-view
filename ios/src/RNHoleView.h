@@ -19,6 +19,8 @@
 
 @interface RNHoleView : UIView
 
-@property (nonatomic) NSArray <RNHoleViewHole*> *holes;
+@property (nonatomic) NSArray <RNHoleViewHole*> *parsedHoles;
+
+@property (nonatomic) NSArray <NSDictionary*> *holes;
 
 @end

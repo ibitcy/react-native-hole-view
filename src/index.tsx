@@ -8,7 +8,7 @@ export interface IRNHole {
   y: number;
   width: number;
   height: number;
-  cornerRadius?: number;
+  borderRadius?: number;
 }
 
 export interface IRNHoleView extends ViewProps {
