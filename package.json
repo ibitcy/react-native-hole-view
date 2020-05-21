@@ -28,11 +28,12 @@
   "author": "ibitcy",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^3.0.0",
-    "react": "*",
-    "react-native": "*"
+    "typescript": "^3.0.0"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "react": "^16.11.0",
+    "react-native": "^0.60.5"
+  },
   "dependencies": {},
   "repository": {
     "type": "git",
