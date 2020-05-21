@@ -15,6 +15,7 @@
     "android",
     "ios",
     "src",
+    "dist",
     "RNHoleView.podspec"
   ],
   "keywords": [
