@@ -6,7 +6,7 @@
 
 ## How it works
 
-![Screenshot](misc/demo1.gif)
+<img src="misc/demo1.gif" alt="drawing" height="500"/>
 
 <details>
 <summary>code</summary>
@@ -36,7 +36,7 @@ import { RNHoleView } from 'react-native-hole-view';
 
 Works with any nested views:
 
-![Screenshot](misc/demo2.gif)
+<img src="misc/demo2.gif" alt="drawing" height="500"/>
 
 <details>
 <summary>code</summary>
