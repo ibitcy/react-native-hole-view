@@ -1,6 +1,5 @@
-<div>
-<img src="misc/cover.jpg" width="500px"</img> 
-</div>
+![Screenshot](misc/cover.jpg)
+[![npm](https://img.shields.io/npm/v/react-native-hole-view.svg)](https://npmjs.com/package/react-native-hole-view)
 
 Component to made an overlay with touch-through holes!
 You can use to make tutorials overlay like this:
