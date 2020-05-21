@@ -11,6 +11,12 @@
     "build": "rm -rf ./dist && tsc -p tsconfig.json",
     "preversion": "npm run build"
   },
+  "files": [
+    "android",
+    "ios",
+    "src",
+    "RNHoleView.podspec"
+  ],
   "keywords": [
     "react-native",
     "react-component",
