@@ -1,4 +1,6 @@
-# react-native-hole-view
+<div>
+<img src="misc/cover.jpg" width="500px"</img> 
+</div>
 
 Component to made an overlay with touch-through holes!
 You can use to make tutorials overlay like this:
