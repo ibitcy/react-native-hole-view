@@ -12,16 +12,27 @@
     "preversion": "npm run build"
   },
   "keywords": [
-    "react-native"
+    "react-native",
+    "react-component",
+    "react-native-component",
+    "react",
+    "mobile",
+    "ios",
+    "android",
+    "ui",
+    "vector",
+    "retina",
+    "hole",
+    "mask"
   ],
   "author": "ibitcy",
   "license": "ISC",
   "devDependencies": {
-    "typescript": "^3.0.0"
-  },
-  "peerDependencies": {
+    "typescript": "^3.0.0",
     "react": "*",
     "react-native": "*"
+  },
+  "peerDependencies": {
   },
   "dependencies": {},
   "repository": {
