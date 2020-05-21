@@ -1,4 +1,5 @@
 ![Screenshot](misc/cover.jpg)
+
 [![Travis](https://img.shields.io/travis/ibitcy/react-native-hole-view.svg)](https://travis-ci.org/ibitcy/react-native-hole-view)
 [![npm](https://img.shields.io/npm/v/react-native-hole-view.svg)](https://npmjs.com/package/react-native-hole-view)
 
@@ -81,3 +82,10 @@ npm install --save react-native-hole-view
 ## Linking
 
 This library fully supports RN's autolinking
+
+## iOS
+
+```
+cd ios && pod install
+```
+
