@@ -4,6 +4,8 @@ node_js:
   - '12'
 script:
   - yarn build
+before_script:
+  - yarn
 branches:
   only:
     - master
