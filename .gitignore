@@ -41,6 +41,13 @@ build/
 local.properties
 *.iml
 
+android/android.iml
+android/gradle.properties
+android/gradle/
+android/gradlew
+android/gradlew.bat
+android/src/main/gen
+
 # BUCK
 buck-out/
 \.buckd/
