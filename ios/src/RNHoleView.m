@@ -26,6 +26,7 @@
 @interface RNHoleView()
 
 @property (nonatomic) CAShapeLayer *maskLayer;
+@property (nonatomic) UIBezierPath *maskPath;
 
 @end
 
@@ -47,14 +48,18 @@
 }
 
 
--(void)layoutSubviews{
+-(void)layoutSubviews
+{
 	_maskLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
 	
-	_maskLayer.path = self.holePaths.CGPath;
+	_maskPath = self.holePaths;
+	
+	_maskLayer.path = _maskPath.CGPath;
 }
 
 
--(void)setHoles:(NSArray<NSDictionary *> *)holes{
+-(void)setHoles:(NSArray<NSDictionary *> *)holes
+{
 	NSMutableArray <RNHoleViewHole*> *parsedHoles = @[].mutableCopy;
 	
 	[holes enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -67,16 +72,20 @@
 }
 
 
--(void)setParsedHoles:(NSArray<RNHoleViewHole *> *)parsedHoles{
+-(void)setParsedHoles:(NSArray<RNHoleViewHole *> *)parsedHoles
+{
 	_parsedHoles = parsedHoles;
 	
-	_maskLayer.path = self.holePaths.CGPath;
+	_maskPath = self.holePaths;
+	
+	_maskLayer.path = _maskPath.CGPath;
 }
 
 
 - (UIBezierPath *)holePaths
 {
 	UIBezierPath *currentPath = [UIBezierPath new];
+	currentPath.usesEvenOddFillRule = YES;
 	
 	[_parsedHoles enumerateObjectsUsingBlock:^(RNHoleViewHole *hole, NSUInteger idx, BOOL *_Nonnull stop) {
 		CGRect rect = hole.rect;
@@ -108,13 +117,9 @@
 {
 	__block BOOL pointInPath = NO;
 	
-	[_parsedHoles enumerateObjectsUsingBlock:^(RNHoleViewHole *hole, NSUInteger idx, BOOL *_Nonnull stop) {
-		
-		if ( CGPathContainsPoint([UIBezierPath bezierPathWithRoundedRect:hole.rect cornerRadius:hole.cornerRadius].CGPath, nil, point, YES) ) {
-			pointInPath = YES;
-			*stop = YES;
-		}
-	}];
+	if (!CGPathContainsPoint(self.maskPath.CGPath, nil, point, YES) ) {
+		pointInPath = YES;
+	}
 	
 	return pointInPath;
 }

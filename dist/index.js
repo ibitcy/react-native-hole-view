@@ -4,7 +4,6 @@ exports.RNHoleView = void 0;
 const react_native_1 = require("react-native");
 const React = require("react");
 const RNHoleViewManager = react_native_1.requireNativeComponent('RNHoleView');
-2;
 exports.RNHoleView = props => {
     return React.createElement(RNHoleViewManager, Object.assign({}, props));
 };
