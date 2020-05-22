@@ -106,15 +106,17 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
         for (i in 0 until childrenCount) {
             val child = v.getChildAt(i)
             if (child.id > 0 && isViewInsideTouch(ev, child)) {
-                mEventDispatcher.dispatchEvent(
-                        TouchEvent.obtain(
-                                child.id,
-                                TouchEventType.START,
-                                ev,
-                                ev.eventTime,
-                                ev.x,
-                                ev.y,
-                                TouchEventCoalescingKeyHelper()))
+                try {
+                    mEventDispatcher.dispatchEvent(
+                            TouchEvent.obtain(
+                                    child.id,
+                                    TouchEventType.START,
+                                    ev,
+                                    ev.eventTime,
+                                    ev.x,
+                                    ev.y,
+                                    TouchEventCoalescingKeyHelper()))
+                } catch (e: Exception) {}
                 if (child is ViewGroup && child.childCount > 0) {
                     passTouchEventToViewAndChildren(child, ev)
                 }
