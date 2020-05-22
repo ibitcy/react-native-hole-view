@@ -1,6 +1,6 @@
 ![Screenshot](misc/cover.jpg)
 
-[![Travis](https://img.shields.io/travis/ibitcy/react-native-hole-view.svg)](https://travis-ci.org/ibitcy/react-native-hole-view)
+[![Travis](https://travis-ci.org/ibitcy/react-native-hole-view.svg?branch=master)](https://travis-ci.org/ibitcy/react-native-hole-view)
 [![npm](https://img.shields.io/npm/v/react-native-hole-view.svg)](https://npmjs.com/package/react-native-hole-view)
 [![npm](https://img.shields.io/npm/dw/react-native-hole-view.svg)](https://npmjs.com/package/react-native-hole-view)
 
