@@ -24,9 +24,6 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
     private val mEventDispatcher: EventDispatcher
 
     init {
-        isClickable = false
-        isFocusable = false
-
         this.setLayerType(View.LAYER_TYPE_HARDWARE, null)
 
         mHolesPaint = Paint()
@@ -60,7 +57,15 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
         }
     }
 
-    private fun isTouchInsideHole(event: MotionEvent): Boolean {
+    override fun drawChild(canvas: Canvas?, child: View?, drawingTime: Long): Boolean {
+        super.drawChild(canvas, child, drawingTime)
+        if (mHolesPath != null) {
+            canvas?.drawPath(mHolesPath!!, mHolesPaint)
+        }
+        return true
+    }
+
+    private fun isTouchInsideHole( touchX:Int, touchY:Int): Boolean {
         if (mHolesPath == null)
             return false
         val clickableRegion = Region()
@@ -68,7 +73,7 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
         mHolesPath!!.computeBounds(rectF, true)
         val rect = Rect(rectF.left.toInt(), rectF.top.toInt(), rectF.right.toInt(), rectF.bottom.toInt())
         clickableRegion.setPath(mHolesPath!!, Region(rect))
-        return clickableRegion.contains(event.x.toInt(), event.y.toInt())
+        return clickableRegion.contains(touchX, touchY)
     }
 
     override fun performClick(): Boolean {
@@ -76,7 +81,7 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        val inside = isTouchInsideHole(event)
+        val inside = isTouchInsideHole(event.x.toInt(), event.y.toInt())
         if (inside) {
             performClick()
             return false
@@ -84,13 +89,24 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
         return !inside
     }
 
+//    We'll need it in case Facebook will accept our PR https://github.com/facebook/react-native/issues/28953
+//    override fun onJSTouchEvent(x: Float, y: Float): Boolean {
+//        val inside = isTouchInsideHole(x.toInt(),y.toInt())
+//        if (inside) {
+//            performClick()
+//            return false
+//        }
+//
+//        return super.onJSTouchEvent(x, y)
+//    }
+
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
         super.onInterceptTouchEvent(ev)
-        return isTouchInsideHole(ev)
+        return isTouchInsideHole(ev.x.toInt(), ev.y.toInt())
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        val inside = isTouchInsideHole(ev)
+        val inside = isTouchInsideHole(ev.x.toInt(), ev.y.toInt())
         if (inside) {
             passTouchEventToViewAndChildren(getRoot(), ev)
         }
