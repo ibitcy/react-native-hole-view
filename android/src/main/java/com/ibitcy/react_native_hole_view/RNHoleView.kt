@@ -76,14 +76,9 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
         return clickableRegion.contains(touchX, touchY)
     }
 
-    override fun performClick(): Boolean {
-        return super.performClick()
-    }
-
     override fun onTouchEvent(event: MotionEvent): Boolean {
         val inside = isTouchInsideHole(event.x.toInt(), event.y.toInt())
         if (inside) {
-            performClick()
             return false
         }
         return !inside
