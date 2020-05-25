@@ -90,3 +90,7 @@ This library fully supports RN's autolinking
 cd ios && pod install
 ```
 
+## Android
+
+By default RN doesn't support click through views on Android and he solution we [use](https://github.com/ibitcy/react-native-hole-view/blob/master/android/src/main/java/com/ibitcy/react_native_hole_view/RNHoleView.kt) is quite dirty, so please support our PR to FB's react-native repo
+https://github.com/facebook/react-native/pull/28956
