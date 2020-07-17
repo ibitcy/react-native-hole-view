@@ -2,6 +2,7 @@ package com.ibitcy.react_native_hole_view
 
 import android.content.Context
 import android.graphics.*
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -109,14 +110,14 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
     }
 
     private fun getRoot(): ViewGroup {
-        return ((rootView.findViewById(android.R.id.content) as ViewGroup))/*.getChildAt(0)) as ViewGroup*/
+        return parent as ViewGroup
     }
 
     private fun passTouchEventToViewAndChildren(v: ViewGroup, ev: MotionEvent) {
         val childrenCount = v.childCount
         for (i in 0 until childrenCount) {
             val child = v.getChildAt(i)
-            if (child.id > 0 && isViewInsideTouch(ev, child)) {
+            if (child.id > 0 && isViewInsideTouch(ev, child) && child.visibility == View.VISIBLE) {
                 try {
                     mEventDispatcher.dispatchEvent(
                             TouchEvent.obtain(
