@@ -79,9 +79,9 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 {
 	NSMutableArray <RNHoleViewHole*> *parsedHoles = @[].mutableCopy;
 	
-	BOOL isRTL = [UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft;
-	
 	[holes enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+		BOOL isRTL = obj[@"isRTL"] && [obj[@"isRTL"] boolValue] == YES;
+		
 		CGFloat borderRadius = obj[@"borderRadius"] ? [obj[@"borderRadius"] floatValue] : DEFAULT_BORDER_RADIUS_VALUE;
 		CGFloat borderTopLeftRadius = obj[@"borderTopLeftRadius"] ? [obj[@"borderTopLeftRadius"] floatValue] : DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE;
 		CGFloat borderTopRightRadius = obj[@"borderTopRightRadius"] ? [obj[@"borderTopRightRadius"] floatValue] : DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE;

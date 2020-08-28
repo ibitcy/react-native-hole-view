@@ -11,14 +11,15 @@ export class RNHole {
   x: number;
   y: number;
   borderRadius?: number;
+  isRTL? = false;
   borderTopLeftRadius? = DEFAULT_RADIUS_VALUE;
   borderTopRightRadius? = DEFAULT_RADIUS_VALUE;
   borderBottomLeftRadius? = DEFAULT_RADIUS_VALUE;
   borderBottomRightRadius? = DEFAULT_RADIUS_VALUE;
   borderTopStartRadius? = DEFAULT_RADIUS_VALUE;
   borderTopEndRadius? = DEFAULT_RADIUS_VALUE;
-  borderBottomStartRadius?= DEFAULT_RADIUS_VALUE;
-  borderBottomEndRadius?= DEFAULT_RADIUS_VALUE;
+  borderBottomStartRadius? = DEFAULT_RADIUS_VALUE;
+  borderBottomEndRadius? = DEFAULT_RADIUS_VALUE;
 }
 
 export interface IRNHoleView extends ViewProps {
