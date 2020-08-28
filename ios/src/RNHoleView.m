@@ -79,12 +79,62 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 {
 	NSMutableArray <RNHoleViewHole*> *parsedHoles = @[].mutableCopy;
 	
+	BOOL isRTL = [UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft;
+	
 	[holes enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
 		CGFloat borderRadius = obj[@"borderRadius"] ? [obj[@"borderRadius"] floatValue] : DEFAULT_BORDER_RADIUS_VALUE;
 		CGFloat borderTopLeftRadius = obj[@"borderTopLeftRadius"] ? [obj[@"borderTopLeftRadius"] floatValue] : DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE;
 		CGFloat borderTopRightRadius = obj[@"borderTopRightRadius"] ? [obj[@"borderTopRightRadius"] floatValue] : DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE;
 		CGFloat borderBottomLeftRadius = obj[@"borderBottomLeftRadius"] ? [obj[@"borderBottomLeftRadius"] floatValue] : DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE;
 		CGFloat borderBottomRightRadius = obj[@"borderBottomRightRadius"] ? [obj[@"borderBottomRightRadius"] floatValue] : DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE;
+		
+		if(obj[@"borderTopStartRadius"]){
+			CGFloat value = [obj[@"borderTopStartRadius"] floatValue];
+			
+			if(value!=DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE){
+				if(isRTL){
+					borderTopRightRadius = value;
+				}else{
+					borderTopLeftRadius = value;
+				}
+			}
+		}
+		
+		if(obj[@"borderTopEndRadius"]){
+			CGFloat value = [obj[@"borderTopEndRadius"] floatValue];
+			
+			if(value!=DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE){
+				if(isRTL){
+					borderTopLeftRadius = value;
+				}else{
+					borderTopRightRadius = value;
+				}
+			}
+		}
+		
+		if(obj[@"borderBottomStartRadius"]){
+			CGFloat value = [obj[@"borderBottomStartRadius"] floatValue];
+			
+			if(value!=DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE){
+				if(isRTL){
+					borderBottomRightRadius = value;
+				}else{
+					borderBottomLeftRadius = value;
+				}
+			}
+		}
+		
+		if(obj[@"borderBottomEndRadius"]){
+			CGFloat value = [obj[@"borderBottomEndRadius"] floatValue];
+			
+			if(value!=DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE){
+				if(isRTL){
+					borderBottomLeftRadius = value;
+				}else{
+					borderBottomRightRadius = value;
+				}
+			}
+		}
 		
 		RNHoleViewHole *hole = [[RNHoleViewHole alloc] initWitnX:[obj[@"x"] floatValue] y:[obj[@"y"] floatValue] width:[obj[@"width"] floatValue] height:[obj[@"height"] floatValue] andBorderRadius:borderRadius andBorderTopLeftRadius:borderTopLeftRadius andBorderTopRightRadius:borderTopRightRadius andBorderBottomLeftRadius:borderBottomLeftRadius andBorderBottomRightRadius:borderBottomRightRadius];
 		
