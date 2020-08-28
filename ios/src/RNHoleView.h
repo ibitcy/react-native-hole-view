@@ -11,9 +11,20 @@
 @interface RNHoleViewHole : NSObject
 
 @property (nonatomic) CGRect rect;
-@property (nonatomic) CGFloat cornerRadius;
+@property (nonatomic) CGFloat borderRadius;
+@property (nonatomic) CGFloat borderTopLeftRadius;
+@property (nonatomic) CGFloat borderTopRightRadius;
+@property (nonatomic) CGFloat borderBottomLeftRadius;
+@property (nonatomic) CGFloat borderBottomRightRadius;
 
-- (instancetype)initWitnX:(CGFloat)x y:(CGFloat)y width:(CGFloat)width height:(CGFloat)height andCornerRadius:(CGFloat)cornerRadius;
+- (instancetype)initWitnX:(CGFloat)x y:(CGFloat)y
+					width:(CGFloat)width
+				   height:(CGFloat)height
+		  andBorderRadius:(CGFloat)borderRadius
+   andBorderTopLeftRadius:(CGFloat)borderTopLeftRadius
+  andBorderTopRightRadius:(CGFloat)borderTopRightRadius
+andBorderBottomLeftRadius:(CGFloat)borderBottomLeftRadius
+andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius;
 
 @end
 
