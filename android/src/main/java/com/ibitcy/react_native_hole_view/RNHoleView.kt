@@ -17,7 +17,16 @@ import com.facebook.react.views.view.ReactViewGroup
 
 class RNHoleView(context: Context) : ReactViewGroup(context) {
 
-    class Hole(var x: Int, var y: Int, var width: Int, var height: Int, var borderRadius: Int = 0)
+    class Hole(
+            var x: Int,
+            var y: Int,
+            var width: Int,
+            var height: Int,
+            var borderTopLeftRadius: Int = 0,
+            var borderTopRightRadius: Int = 0,
+            var borderBottomLeftRadius: Int = 0,
+            var borderBottomRightRadius: Int = 0
+    )
 
     private var mHolesPath: Path? = null
     private val mHolesPaint: Paint
@@ -38,13 +47,23 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
     fun setHoles(holes: List<Hole>) {
         mHolesPath = Path()
         holes.forEach { hole ->
+            val radii = floatArrayOf(
+                    hole.borderTopLeftRadius.toFloat(),
+                    hole.borderTopLeftRadius.toFloat(),
+                    hole.borderTopRightRadius.toFloat(),
+                    hole.borderTopRightRadius.toFloat(),
+                    hole.borderBottomRightRadius.toFloat(),
+                    hole.borderBottomRightRadius.toFloat(),
+                    hole.borderBottomLeftRadius.toFloat(),
+                    hole.borderBottomLeftRadius.toFloat()
+            )
+
             mHolesPath!!.addRoundRect(RectF(
                     hole.x.toFloat(),
                     hole.y.toFloat(),
                     hole.width.toFloat() + hole.x.toFloat(),
                     hole.height.toFloat() + hole.y.toFloat()),
-                    hole.borderRadius.toFloat(),
-                    hole.borderRadius.toFloat(),
+                    radii,
                     Path.Direction.CW
             )
         }

@@ -8,14 +8,31 @@
 
 #import "RNHoleView.h"
 
+#define degreesToRadians(x) ((x) * M_PI / 180.0)
+
+static const CGFloat DEFAULT_BORDER_RADIUS_VALUE = 0.f;
+static const CGFloat DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE = -1.f;
+
 @implementation RNHoleViewHole
 
-- (instancetype)initWitnX:(CGFloat)x y:(CGFloat)y width:(CGFloat)width height:(CGFloat)height andCornerRadius:(CGFloat)cornerRadius
+- (instancetype)initWitnX:(CGFloat)x y:(CGFloat)y
+					width:(CGFloat)width
+				   height:(CGFloat)height
+		  andBorderRadius:(CGFloat)borderRadius
+   andBorderTopLeftRadius:(CGFloat)borderTopLeftRadius
+  andBorderTopRightRadius:(CGFloat)borderTopRightRadius
+andBorderBottomLeftRadius:(CGFloat)borderBottomLeftRadius
+andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 {
 	self = [super init];
 	if (self) {
 		self.rect = CGRectMake(x, y, width, height);
-		self.cornerRadius = cornerRadius;
+		self.borderRadius = borderRadius;
+		
+		self.borderTopLeftRadius = borderTopLeftRadius == DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE ? borderRadius : borderTopLeftRadius;
+		self.borderTopRightRadius = borderTopRightRadius == DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE ? borderRadius : borderTopRightRadius;
+		self.borderBottomLeftRadius = borderBottomLeftRadius == DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE ? borderRadius : borderBottomLeftRadius;
+		self.borderBottomRightRadius = borderBottomRightRadius == DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE ? borderRadius : borderBottomRightRadius;
 	}
 	return self;
 }
@@ -63,7 +80,63 @@
 	NSMutableArray <RNHoleViewHole*> *parsedHoles = @[].mutableCopy;
 	
 	[holes enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-		RNHoleViewHole *hole = [[RNHoleViewHole alloc] initWitnX:[obj[@"x"] floatValue] y:[obj[@"y"] floatValue] width:[obj[@"width"] floatValue] height:[obj[@"height"] floatValue] andCornerRadius:obj[@"borderRadius"] ? [obj[@"borderRadius"] floatValue] : 0.0f];
+		BOOL isRTL = obj[@"isRTL"] && [obj[@"isRTL"] boolValue] == YES;
+		
+		CGFloat borderRadius = obj[@"borderRadius"] ? [obj[@"borderRadius"] floatValue] : DEFAULT_BORDER_RADIUS_VALUE;
+		CGFloat borderTopLeftRadius = obj[@"borderTopLeftRadius"] ? [obj[@"borderTopLeftRadius"] floatValue] : DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE;
+		CGFloat borderTopRightRadius = obj[@"borderTopRightRadius"] ? [obj[@"borderTopRightRadius"] floatValue] : DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE;
+		CGFloat borderBottomLeftRadius = obj[@"borderBottomLeftRadius"] ? [obj[@"borderBottomLeftRadius"] floatValue] : DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE;
+		CGFloat borderBottomRightRadius = obj[@"borderBottomRightRadius"] ? [obj[@"borderBottomRightRadius"] floatValue] : DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE;
+		
+		if(obj[@"borderTopStartRadius"]){
+			CGFloat value = [obj[@"borderTopStartRadius"] floatValue];
+			
+			if(value!=DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE){
+				if(isRTL){
+					borderTopRightRadius = value;
+				}else{
+					borderTopLeftRadius = value;
+				}
+			}
+		}
+		
+		if(obj[@"borderTopEndRadius"]){
+			CGFloat value = [obj[@"borderTopEndRadius"] floatValue];
+			
+			if(value!=DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE){
+				if(isRTL){
+					borderTopLeftRadius = value;
+				}else{
+					borderTopRightRadius = value;
+				}
+			}
+		}
+		
+		if(obj[@"borderBottomStartRadius"]){
+			CGFloat value = [obj[@"borderBottomStartRadius"] floatValue];
+			
+			if(value!=DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE){
+				if(isRTL){
+					borderBottomRightRadius = value;
+				}else{
+					borderBottomLeftRadius = value;
+				}
+			}
+		}
+		
+		if(obj[@"borderBottomEndRadius"]){
+			CGFloat value = [obj[@"borderBottomEndRadius"] floatValue];
+			
+			if(value!=DEFAULT_SPECIFIC_BORDER_RADIUS_VALUE){
+				if(isRTL){
+					borderBottomLeftRadius = value;
+				}else{
+					borderBottomRightRadius = value;
+				}
+			}
+		}
+		
+		RNHoleViewHole *hole = [[RNHoleViewHole alloc] initWitnX:[obj[@"x"] floatValue] y:[obj[@"y"] floatValue] width:[obj[@"width"] floatValue] height:[obj[@"height"] floatValue] andBorderRadius:borderRadius andBorderTopLeftRadius:borderTopLeftRadius andBorderTopRightRadius:borderTopRightRadius andBorderBottomLeftRadius:borderBottomLeftRadius andBorderBottomRightRadius:borderBottomRightRadius];
 		
 		[parsedHoles addObject:hole];
 	}];
@@ -90,7 +163,12 @@
 	[_parsedHoles enumerateObjectsUsingBlock:^(RNHoleViewHole *hole, NSUInteger idx, BOOL *_Nonnull stop) {
 		CGRect rect = hole.rect;
 		
-		UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:hole.cornerRadius];
+		UIBezierPath *path = [UIBezierPath new];
+		
+		[path addArcWithCenter:CGPointMake(rect.origin.x+rect.size.width-hole.borderTopRightRadius, rect.origin.y+hole.borderTopRightRadius) radius:hole.borderTopRightRadius startAngle:degreesToRadians(-90.f) endAngle:degreesToRadians(0.f)  clockwise:YES];
+		[path addArcWithCenter:CGPointMake(rect.origin.x+rect.size.width-hole.borderBottomRightRadius, rect.origin.y+rect.size.height-hole.borderBottomRightRadius) radius:hole.borderBottomRightRadius startAngle:degreesToRadians(0.f) endAngle:degreesToRadians(90.f)  clockwise:YES];
+		[path addArcWithCenter:CGPointMake(rect.origin.x+hole.borderBottomLeftRadius, rect.origin.y+rect.size.height-hole.borderBottomLeftRadius) radius:hole.borderBottomLeftRadius startAngle:degreesToRadians(90.f) endAngle:degreesToRadians(180.f)  clockwise:YES];
+		[path addArcWithCenter:CGPointMake(rect.origin.x+hole.borderTopLeftRadius, rect.origin.y+hole.borderTopLeftRadius) radius:hole.borderTopLeftRadius startAngle:degreesToRadians(180.f) endAngle:degreesToRadians(270.f)  clockwise:YES];
 		
 		[currentPath appendPath:path];
 	}];
