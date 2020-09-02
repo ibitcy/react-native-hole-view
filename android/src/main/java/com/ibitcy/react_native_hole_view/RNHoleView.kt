@@ -58,14 +58,6 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
                     hole.borderBottomLeftRadius.toFloat()
             )
 
-
-            Log.d("12345", "hole " + hole.x + " " + hole.y)
-
-            radii.forEach {
-                Log.d("12345", "rad " + it)
-            }
-
-
             mHolesPath!!.addRoundRect(RectF(
                     hole.x.toFloat(),
                     hole.y.toFloat(),
