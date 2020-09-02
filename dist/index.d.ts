@@ -1,17 +1,22 @@
 import { ViewProps } from 'react-native';
 import * as React from 'react';
-export interface IRNHole {
+export declare class RNHole {
+    height: number;
+    width: number;
     x: number;
     y: number;
-    width: number;
-    height: number;
     borderRadius?: number;
-    borderTopLeftRadius?: -1;
-    borderTopRightRadius?: -1;
-    borderBottomLeftRadius?: -1;
-    borderBottomRightRadius?: -1;
+    isRTL?: boolean;
+    borderTopLeftRadius?: number;
+    borderTopRightRadius?: number;
+    borderBottomLeftRadius?: number;
+    borderBottomRightRadius?: number;
+    borderTopStartRadius?: number;
+    borderTopEndRadius?: number;
+    borderBottomStartRadius?: number;
+    borderBottomEndRadius?: number;
 }
 export interface IRNHoleView extends ViewProps {
-    holes?: IRNHole[];
+    holes?: RNHole[];
 }
 export declare const RNHoleView: React.FC<IRNHoleView>;
