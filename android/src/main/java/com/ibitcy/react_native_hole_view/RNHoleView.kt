@@ -138,17 +138,6 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
         }
     }
 
-//    override fun drawChild(canvas: Canvas?, child: View?, drawingTime: Long): Boolean {
-//        super.drawChild(canvas, child, drawingTime)
-//        if (mHolesPath != null) {
-//            canvas?.drawPath(mHolesPath!!, mHolesPaint)
-//        }
-//
-//        Log.d("12345", "drawChild")
-//
-//        return true
-//    }
-
     private fun isTouchInsideHole(touchX: Int, touchY: Int): Boolean {
         if (mHolesPath == null)
             return false
