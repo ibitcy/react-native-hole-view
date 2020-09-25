@@ -1,8 +1,9 @@
 package com.ibitcy.react_native_hole_view
 
+import android.animation.ObjectAnimator
+import android.animation.RectEvaluator
 import android.content.Context
 import android.graphics.*
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +18,12 @@ import com.facebook.react.views.view.ReactViewGroup
 
 class RNHoleView(context: Context) : ReactViewGroup(context) {
 
+    companion object {
+        const val ANIMATION_DURATION_DEFAULT = 1000L
+
+        private val sRectEvaluator = RectEvaluator()
+    }
+
     class Hole(
             var x: Int,
             var y: Int,
@@ -25,8 +32,12 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
             var borderTopLeftRadius: Int = 0,
             var borderTopRightRadius: Int = 0,
             var borderBottomLeftRadius: Int = 0,
-            var borderBottomRightRadius: Int = 0
+            var borderBottomRightRadius: Int = 0,
+            var rect: Rect? = null
     )
+
+    var animate = false
+    var animationDuration = ANIMATION_DURATION_DEFAULT
 
     private var mHolesPath: Path? = null
     private val mHolesPaint: Paint
@@ -43,10 +54,14 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
         val uiManager = (context as ReactContext).getNativeModule(UIManagerModule::class.java)
         mEventDispatcher = uiManager!!.eventDispatcher
     }
+    
+    private val mHoles = ArrayList<Hole>()
 
     fun setHoles(holes: List<Hole>) {
+        val animate = mHoles.isNotEmpty() && animate
         mHolesPath = Path()
-        holes.forEach { hole ->
+
+        holes.forEachIndexed { index, hole ->
             val radii = floatArrayOf(
                     hole.borderTopLeftRadius.toFloat(),
                     hole.borderTopLeftRadius.toFloat(),
@@ -58,16 +73,62 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
                     hole.borderBottomLeftRadius.toFloat()
             )
 
-            mHolesPath!!.addRoundRect(RectF(
-                    hole.x.toFloat(),
-                    hole.y.toFloat(),
-                    hole.width.toFloat() + hole.x.toFloat(),
-                    hole.height.toFloat() + hole.y.toFloat()),
-                    radii,
-                    Path.Direction.CW
-            )
+            val toRect = Rect(
+                    hole.x,
+                    hole.y,
+                    hole.width + hole.x,
+                    hole.height + hole.y)
+
+            if (animate) {
+                val fromHole = if (index < mHoles.size) mHoles[index] else null
+                val fromRect = if (fromHole != null) Rect(
+                        fromHole.x,
+                        fromHole.y,
+                        fromHole.width + fromHole.x,
+                        fromHole.height + fromHole.y) else null
+                if (fromRect != null) {
+                    hole.rect = fromRect
+
+                    val bottomAnimator: ObjectAnimator = ObjectAnimator.ofObject(hole, "rect",
+                            sRectEvaluator, fromRect, toRect)
+                    bottomAnimator.addUpdateListener {
+                        val value = it.animatedValue
+                        value as Rect
+                        mHolesPath = Path()
+                        mHolesPath!!.addRoundRect(
+                                value.left.toFloat(),
+                                value.top.toFloat(),
+                                value.right.toFloat(),
+                                value.bottom.toFloat(),
+                                radii,
+                                Path.Direction.CW
+                        )
+                        postInvalidate()
+                    }
+                    bottomAnimator.duration = animationDuration
+                    bottomAnimator.start()
+                } else {
+                    mHolesPath!!.addRoundRect(toRect.left.toFloat(), toRect.top.toFloat(), toRect.right.toFloat(), toRect.bottom.toFloat(),
+                            radii,
+                            Path.Direction.CW
+                    )
+                    postInvalidate()
+                }
+            } else {
+                mHolesPath!!.addRoundRect(RectF(
+                        hole.x.toFloat(),
+                        hole.y.toFloat(),
+                        hole.width.toFloat() + hole.x.toFloat(),
+                        hole.height.toFloat() + hole.y.toFloat()),
+                        radii,
+                        Path.Direction.CW
+                )
+                postInvalidate()
+            }
         }
-        invalidate()
+
+        mHoles.clear()
+        mHoles.addAll(holes)
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -77,15 +138,18 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
         }
     }
 
-    override fun drawChild(canvas: Canvas?, child: View?, drawingTime: Long): Boolean {
-        super.drawChild(canvas, child, drawingTime)
-        if (mHolesPath != null) {
-            canvas?.drawPath(mHolesPath!!, mHolesPaint)
-        }
-        return true
-    }
+//    override fun drawChild(canvas: Canvas?, child: View?, drawingTime: Long): Boolean {
+//        super.drawChild(canvas, child, drawingTime)
+//        if (mHolesPath != null) {
+//            canvas?.drawPath(mHolesPath!!, mHolesPaint)
+//        }
+//
+//        Log.d("12345", "drawChild")
+//
+//        return true
+//    }
 
-    private fun isTouchInsideHole( touchX:Int, touchY:Int): Boolean {
+    private fun isTouchInsideHole(touchX: Int, touchY: Int): Boolean {
         if (mHolesPath == null)
             return false
         val clickableRegion = Region()

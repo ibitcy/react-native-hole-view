@@ -24,6 +24,8 @@ export class RNHole {
 
 export interface IRNHoleView extends ViewProps {
   holes?: RNHole[];
+  animate?: boolean;
+  animationDuration?: number;
 }
 
 export const RNHoleView: React.FC<IRNHoleView> = props => {

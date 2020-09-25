@@ -18,6 +18,16 @@ class RNHoleViewManager(val reactContext: ReactApplicationContext): ViewGroupMan
         return RNHoleView(reactContext)
     }
 
+    @ReactProp(name = "animationDuration")
+    fun animationDuration(view: RNHoleView, animationDuration: Long) {
+        view.animationDuration = animationDuration
+    }
+
+    @ReactProp(name = "animate")
+    fun animate(view: RNHoleView, animate: Boolean) {
+        view.animate = animate
+    }
+
     @ReactProp(name = "holes")
     fun setHoles(view: RNHoleView, holesArg: ReadableArray) {
         if (holesArg.size() == 0) {
