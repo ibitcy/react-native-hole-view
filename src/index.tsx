@@ -3,6 +3,8 @@ import * as React from 'react';
 
 const RNHoleViewManager = requireNativeComponent('RNHoleView');
 
+const DEFAULT_DURATION = 1000;
+
 const DEFAULT_RADIUS_VALUE = -1;
 
 export class RNHole {
@@ -22,10 +24,20 @@ export class RNHole {
   borderBottomEndRadius? = DEFAULT_RADIUS_VALUE;
 }
 
+export enum ERNHoleViewAnimationType {
+  EASE_IN = 'EASE_IN',
+  EASE_OUT = 'EASE_OUT',
+  EASE_IN_OUT = 'EASE_IN_OUT',
+}
+
+export class IRNHoleViewAnimation {
+  duration?: number = DEFAULT_DURATION;
+  type: ERNHoleViewAnimationType;
+}
+
 export interface IRNHoleView extends ViewProps {
   holes?: RNHole[];
-  animate?: boolean;
-  animationDuration?: number;
+  animation?: IRNHoleViewAnimation;
 }
 
 export const RNHoleView: React.FC<IRNHoleView> = props => {

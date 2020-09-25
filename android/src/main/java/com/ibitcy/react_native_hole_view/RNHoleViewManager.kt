@@ -3,6 +3,7 @@ package com.ibitcy.react_native_hole_view
 import android.content.res.Resources
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.bridge.ReadableArray
+import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
@@ -18,14 +19,20 @@ class RNHoleViewManager(val reactContext: ReactApplicationContext): ViewGroupMan
         return RNHoleView(reactContext)
     }
 
-    @ReactProp(name = "animationDuration")
-    fun animationDuration(view: RNHoleView, animationDuration: Double) {
-        view.animationDuration = animationDuration.toLong()
-    }
+    @ReactProp(name = "animation")
+    fun setAnimation(view: RNHoleView, animation: ReadableMap) {
+        var duration = RNHoleView.ANIMATION_DURATION_DEFAULT
+        if (animation.hasKey("duration")) {
+            duration = animation.getDouble("duration").toLong()
+        }
+        var type: RNHoleView.EAnimationType? = null
+        if (animation.hasKey("type")) {
+            type = RNHoleView.EAnimationType.valueOf(animation.getString("type")!!)
+        }
 
-    @ReactProp(name = "animate")
-    fun animate(view: RNHoleView, animate: Boolean) {
-        view.animate = animate
+        if (type != null) {
+            view.animation = RNHoleView.Animation(duration, type)
+        }
     }
 
     @ReactProp(name = "holes")
