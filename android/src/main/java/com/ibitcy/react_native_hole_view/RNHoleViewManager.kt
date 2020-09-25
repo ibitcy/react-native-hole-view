@@ -19,8 +19,8 @@ class RNHoleViewManager(val reactContext: ReactApplicationContext): ViewGroupMan
     }
 
     @ReactProp(name = "animationDuration")
-    fun animationDuration(view: RNHoleView, animationDuration: Long) {
-        view.animationDuration = animationDuration
+    fun animationDuration(view: RNHoleView, animationDuration: Double) {
+        view.animationDuration = animationDuration.toLong()
     }
 
     @ReactProp(name = "animate")
