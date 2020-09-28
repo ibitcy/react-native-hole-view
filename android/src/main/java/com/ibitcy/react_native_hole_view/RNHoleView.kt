@@ -1,15 +1,16 @@
 package com.ibitcy.react_native_hole_view
 
+import android.animation.Animator
+import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.RectEvaluator
 import android.content.Context
 import android.graphics.*
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
+import android.view.animation.*
 import android.view.animation.Interpolator
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.UIManagerModule
@@ -81,6 +82,8 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
 
     fun setHoles(holes: List<Hole>) {
         mHolesPath = Path()
+        
+        val animatorList = arrayListOf<Animator>()
 
         holes.forEachIndexed { index, hole ->
             val radii = floatArrayOf(
@@ -110,13 +113,15 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
                 if (fromRect != null) {
                     hole.rect = fromRect
 
-                    val bottomAnimator: ObjectAnimator = ObjectAnimator.ofObject(hole, "rect",
+                    val holeAnimator: ObjectAnimator = ObjectAnimator.ofObject(hole, "rect",
                             sRectEvaluator, fromRect, toRect)
-                    bottomAnimator.interpolator = getAnimationInterpolator(animation!!.type)
-                    bottomAnimator.addUpdateListener {
+                    holeAnimator.interpolator = getAnimationInterpolator(animation!!.type)
+                    holeAnimator.addUpdateListener {
                         val value = it.animatedValue
                         value as Rect
-                        mHolesPath = Path()
+                        if (index == 0) {
+                            mHolesPath = Path()
+                        }
                         mHolesPath!!.addRoundRect(
                                 value.left.toFloat(),
                                 value.top.toFloat(),
@@ -127,8 +132,7 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
                         )
                         postInvalidate()
                     }
-                    bottomAnimator.duration = animation!!.duration
-                    bottomAnimator.start()
+                    animatorList.add(holeAnimator)
                 } else {
                     mHolesPath!!.addRoundRect(toRect.left.toFloat(), toRect.top.toFloat(), toRect.right.toFloat(), toRect.bottom.toFloat(),
                             radii,
@@ -147,6 +151,13 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
                 )
                 postInvalidate()
             }
+        }
+
+        if (animatorList.isNotEmpty()) {
+            val animatorSet = AnimatorSet()
+            animatorSet.duration = animation!!.duration
+            animatorSet.playTogether(animatorList)
+            animatorSet.start()
         }
 
         mHoles.clear()
