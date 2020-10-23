@@ -45,6 +45,11 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 @property (nonatomic) CAShapeLayer *maskLayer;
 @property (nonatomic) UIBezierPath *maskPath;
 
+@property (nonatomic) NSString *animationType;
+@property (nonatomic) NSNumber *animationDuration;
+
+@property (nonatomic) dispatch_source_t holesTimer;
+
 @end
 
 @implementation RNHoleView
@@ -69,9 +74,7 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 {
 	_maskLayer.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
 	
-	_maskPath = self.holePaths;
-	
-	_maskLayer.path = _maskPath.CGPath;
+	[self setMaskPath:self.holePaths skipAnimation:YES];
 }
 
 
@@ -145,15 +148,70 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 }
 
 
+-(void)setAnimation:(NSDictionary *)animation{
+	_animation = animation;
+	
+	if(_animation){
+		_animationDuration = animation[@"duration"];
+	}
+}
+
+
 -(void)setParsedHoles:(NSArray<RNHoleViewHole *> *)parsedHoles
 {
 	_parsedHoles = parsedHoles;
 	
-	_maskPath = self.holePaths;
+	[self stopHolesTimer];
 	
-	_maskLayer.path = _maskPath.CGPath;
+	dispatch_source_t timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0,  dispatch_get_main_queue());
+	
+	if ( timer ) {
+		dispatch_source_set_timer(timer, dispatch_time(DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC), 0.01 * NSEC_PER_SEC, (1ull * NSEC_PER_SEC) / 10);
+		dispatch_source_set_event_handler(timer, ^(){
+			[self stopHolesTimer];
+			
+			[self setMaskPath:self.holePaths skipAnimation:NO];
+		});
+		dispatch_resume(timer);
+		
+		_holesTimer = timer;
+	}
 }
 
+
+-(void)stopHolesTimer
+{
+	if(_holesTimer){
+		dispatch_source_cancel(_holesTimer);
+		_holesTimer = nil;
+	}
+}
+
+
+-(void)setMaskPath:(UIBezierPath *)maskPath skipAnimation:(BOOL)skipAnimation{
+	UIBezierPath *oldPath = _maskPath;
+	
+	_maskPath = maskPath;
+	
+	if(!skipAnimation && self.animation){
+		[_maskLayer removeAnimationForKey:@"path"];
+		
+		CABasicAnimation *pathAnimation = [CABasicAnimation new];
+		
+		pathAnimation.duration = _animationDuration.doubleValue/1000.0;
+		pathAnimation.keyPath = @"path";
+		pathAnimation.fromValue = oldPath ? (id)oldPath.CGPath : (id)_maskLayer.path;
+		pathAnimation.toValue = (id)_maskPath.CGPath;
+		pathAnimation.removedOnCompletion = NO;
+		pathAnimation.fillMode = kCAFillModeForwards;
+		pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+		
+		[_maskLayer addAnimation:pathAnimation forKey:@"path"];
+	}else{
+		_maskLayer.path = _maskPath.CGPath;
+	}
+	
+}
 
 - (UIBezierPath *)holePaths
 {

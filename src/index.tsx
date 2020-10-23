@@ -25,14 +25,15 @@ export class RNHole {
 }
 
 export enum ERNHoleViewAnimationType {
+  LINEAR = 'LINEAR',
   EASE_IN = 'EASE_IN',
   EASE_OUT = 'EASE_OUT',
   EASE_IN_OUT = 'EASE_IN_OUT',
 }
 
-export class IRNHoleViewAnimation {
-  duration?: number = DEFAULT_DURATION;
-  type: ERNHoleViewAnimationType;
+export interface IRNHoleViewAnimation {
+  duration?: number;
+  type?: ERNHoleViewAnimationType;
 }
 
 export interface IRNHoleView extends ViewProps {
@@ -41,5 +42,10 @@ export interface IRNHoleView extends ViewProps {
 }
 
 export const RNHoleView: React.FC<IRNHoleView> = props => {
+  if (props.animation) {
+    props.animation.duration = props.animation.duration ? props.animation.duration : DEFAULT_DURATION;
+    props.animation.type = props.animation.type ? props.animation.type : ERNHoleViewAnimationType.LINEAR;
+  }
+
   return <RNHoleViewManager {...props} />;
 };

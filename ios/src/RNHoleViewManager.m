@@ -20,6 +20,8 @@ RCT_EXPORT_MODULE(RNHoleView)
 
 RCT_EXPORT_VIEW_PROPERTY(holes, NSArray)
 
+RCT_EXPORT_VIEW_PROPERTY(animation, NSDictionary)
+
 -(UIView*)view{
     return [RNHoleView new];
 }

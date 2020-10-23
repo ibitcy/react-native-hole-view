@@ -34,4 +34,6 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius;
 
 @property (nonatomic) NSArray <NSDictionary*> *holes;
 
+@property (nonatomic) NSDictionary *animation;
+
 @end
