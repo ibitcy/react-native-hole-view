@@ -10,6 +10,8 @@ ios/example/Pods
 node_modules/
 npm-debug.log
 yarn-error.log
+example/node_modules/
+example/ios/Pods/**
 
 
 # Xcode
