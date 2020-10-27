@@ -45,8 +45,8 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 @property (nonatomic) CAShapeLayer *maskLayer;
 @property (nonatomic) UIBezierPath *maskPath;
 
-@property (nonatomic) NSString *animationType;
 @property (nonatomic) NSNumber *animationDuration;
+@property (nonatomic) CAMediaTimingFunction *animationTimingFunction;
 
 @property (nonatomic) dispatch_source_t holesTimer;
 
@@ -153,6 +153,18 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 	
 	if(_animation){
 		_animationDuration = animation[@"duration"];
+		NSString *timingFunction = animation[@"timingFunction"];
+	
+		if([timingFunction isEqualToString:@"LINEAR"]){
+			_animationTimingFunction =  [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+		}else if([timingFunction isEqualToString:@"EASE_IN"]){
+			_animationTimingFunction =  [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+		}else if([timingFunction isEqualToString:@"EASE_OUT"]){
+			_animationTimingFunction =  [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+		}else if([timingFunction isEqualToString:@"EASE_IN_OUT"]){
+			_animationTimingFunction =  [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+		}
+		
 	}
 }
 
@@ -204,7 +216,7 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 		pathAnimation.toValue = (id)_maskPath.CGPath;
 		pathAnimation.removedOnCompletion = NO;
 		pathAnimation.fillMode = kCAFillModeForwards;
-		pathAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+		pathAnimation.timingFunction = _animationTimingFunction;
 		
 		[_maskLayer addAnimation:pathAnimation forKey:@"path"];
 	}else{
