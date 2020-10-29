@@ -1,16 +1,19 @@
 {
-	"compilerOptions": {
-		"module": "commonjs",
-		"sourceMap": true,
-		"outDir": "./dist",
-		"declaration": true,
-		"jsx": "react",
-		"target": "es6",
-		"experimentalDecorators": true,
-		"moduleResolution": "node",
-		"noImplicitAny": false,
-		"typeRoots": [
-			"./node_modules/@types/"
-		]
-	}
+  "compilerOptions": {
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "declaration": true,
+    "jsx": "react",
+    "target": "es6",
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "noImplicitAny": false,
+    "typeRoots": [
+      "./node_modules/@types/"
+    ]
+  },
+  "exclude": [
+    "example"
+  ]
 }

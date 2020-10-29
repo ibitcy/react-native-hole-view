@@ -16,7 +16,18 @@ export declare class RNHole {
     borderBottomStartRadius?: number;
     borderBottomEndRadius?: number;
 }
+export declare enum ERNHoleViewTimingFunction {
+    LINEAR = "LINEAR",
+    EASE_IN = "EASE_IN",
+    EASE_OUT = "EASE_OUT",
+    EASE_IN_OUT = "EASE_IN_OUT"
+}
+export interface IRNHoleViewAnimation {
+    duration?: number;
+    timingFunction?: ERNHoleViewTimingFunction;
+}
 export interface IRNHoleView extends ViewProps {
     holes?: RNHole[];
+    animation?: IRNHoleViewAnimation;
 }
 export declare const RNHoleView: React.FC<IRNHoleView>;

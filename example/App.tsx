@@ -8,7 +8,7 @@
  * @format
  */
 
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
     SafeAreaView,
     StyleSheet,
@@ -22,11 +22,29 @@ import {
     Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-import {RNHoleView} from "react-native-hole-view";
+import {RNHole, RNHoleView, ERNHoleViewTimingFunction} from "react-native-hole-view";
 
 const App = () => {
+    const [holes, setHoles] = useState<RNHole[]>([]);
+    const [animated, setAnimated] = useState<boolean>(false);
+
+    const firstHole: RNHole = {x: 150, y: 390, width: 120, height: 120, borderRadius: 60};
+    const secondHole: RNHole = {x: 150, y: 0, width: 120, height: 120, borderRadius: 60};
 
 
+    const onPress = useCallback(() => {
+        if (animated) {
+            setHoles([firstHole]);
+        } else {
+            setHoles([secondHole])
+        }
+
+        setAnimated(!animated);
+    }, [animated])
+
+    useEffect(() => {
+        onPress();
+    }, []);
 
     return (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -49,22 +67,24 @@ const App = () => {
                     height: '100%',
                     backgroundColor: 'rgba(34,146,231,0.4)'
                 }}
-                holes={[{x: 150, y: 390, width: 120, height: 120, borderRadius: 60}]}>
+                animation={{timingFunction: ERNHoleViewTimingFunction.EASE_IN_OUT, duration: 200}}
+                holes={holes}
+            >
             </RNHoleView>
             <View
                 pointerEvents={'box-none'}
                 style={{
-                position: 'absolute',
-                flex: 1,
-                width: '100%',
-                height: '100%',
-                alignItems: 'flex-end',
-                flexDirection: 'row',
-                justifyContent: 'center'
+                    position: 'absolute',
+                    flex: 1,
+                    width: '100%',
+                    height: '100%',
+                    alignItems: 'flex-end',
+                    flexDirection: 'row',
+                    justifyContent: 'center'
 
-            }}>
-                <TouchableOpacity onPress={() => {
-                }} style={{backgroundColor: 'pink', padding: 10, borderRadius: 5, bottom: 50}}>
+                }}>
+                <TouchableOpacity onPress={onPress}
+                                  style={{backgroundColor: 'pink', padding: 10, borderRadius: 5, bottom: 50}}>
                     <Text>{"Animate!"}</Text>
                 </TouchableOpacity>
             </View>
