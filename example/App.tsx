@@ -78,7 +78,9 @@ const App = () => {
                     setAnimation(undefined);
                 }}
             >
-                <Video source={{uri: 'http://clips.vorwaerts-gmbh.de/VfE_html5.mp4'}} style={{flex: 1}}/>
+                <Video source={{uri: 'http://clips.vorwaerts-gmbh.de/VfE_html5.mp4'}}
+                       resizeMode={"contain"}
+                       style={{flex: 1}}/>
             </RNHoleView>
             <View
                 pointerEvents={'box-none'}
