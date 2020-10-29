@@ -40,7 +40,7 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 @end
 
 
-@interface RNHoleView()
+@interface RNHoleView()<CAAnimationDelegate>
 
 @property (nonatomic) CAShapeLayer *maskLayer;
 @property (nonatomic) UIBezierPath *maskPath;
@@ -217,6 +217,7 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 		pathAnimation.removedOnCompletion = NO;
 		pathAnimation.fillMode = kCAFillModeForwards;
 		pathAnimation.timingFunction = _animationTimingFunction;
+		pathAnimation.delegate = self;
 		
 		[_maskLayer addAnimation:pathAnimation forKey:@"path"];
 	}else{
@@ -270,6 +271,14 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 	}
 	
 	return pointInPath;
+}
+
+-(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)finished{
+	if(finished){
+		if(self.onAnimationFinished){
+			self.onAnimationFinished(NULL);
+		}
+	}
 }
 
 @end

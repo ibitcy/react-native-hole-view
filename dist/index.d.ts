@@ -29,5 +29,6 @@ export interface IRNHoleViewAnimation {
 export interface IRNHoleView extends ViewProps {
     holes?: RNHole[];
     animation?: IRNHoleViewAnimation;
+    onAnimationFinished?: () => void;
 }
 export declare const RNHoleView: React.FC<IRNHoleView>;

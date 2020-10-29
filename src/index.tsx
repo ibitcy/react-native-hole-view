@@ -34,12 +34,12 @@ export enum ERNHoleViewTimingFunction {
 export interface IRNHoleViewAnimation {
     duration?: number;
     timingFunction?: ERNHoleViewTimingFunction;
-    onAnimationFinished?: () => void;
 }
 
 export interface IRNHoleView extends ViewProps {
     holes?: RNHole[];
     animation?: IRNHoleViewAnimation;
+    onAnimationFinished?: () => void;
 }
 
 export const RNHoleView: React.FC<IRNHoleView> = props => {

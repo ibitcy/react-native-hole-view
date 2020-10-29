@@ -22,15 +22,17 @@ import {
     Colors,
 } from 'react-native/Libraries/NewAppScreen';
 
-import {RNHole, RNHoleView, ERNHoleViewTimingFunction} from "react-native-hole-view";
+import {RNHole, RNHoleView, ERNHoleViewTimingFunction, IRNHoleViewAnimation} from "react-native-hole-view";
+
+const firstHole: RNHole = {x: 150, y: 390, width: 120, height: 120, borderRadius: 60};
+const secondHole: RNHole = {x: 150, y: 40, width: 120, height: 120, borderRadius: 60};
+
+const animationSettings: IRNHoleViewAnimation = {timingFunction: ERNHoleViewTimingFunction.EASE_IN_OUT, duration: 200};
 
 const App = () => {
     const [holes, setHoles] = useState<RNHole[]>([]);
     const [animated, setAnimated] = useState<boolean>(false);
-
-    const firstHole: RNHole = {x: 150, y: 390, width: 120, height: 120, borderRadius: 60};
-    const secondHole: RNHole = {x: 150, y: 40, width: 120, height: 120, borderRadius: 60};
-
+    const [animation, setAnimation] = useState<IRNHoleViewAnimation | undefined>(undefined);
 
     const onPress = useCallback(() => {
         if (animated) {
@@ -39,8 +41,9 @@ const App = () => {
             setHoles([secondHole])
         }
 
+        setAnimation({...animationSettings});
         setAnimated(!animated);
-    }, [animated])
+    }, [animated, animation])
 
     useEffect(() => {
         onPress();
@@ -67,8 +70,11 @@ const App = () => {
                     height: '100%',
                     backgroundColor: 'rgba(34,146,231,0.4)'
                 }}
-                animation={{timingFunction: ERNHoleViewTimingFunction.EASE_IN_OUT, duration: 200}}
+                animation={animation}
                 holes={holes}
+                onAnimationFinished={() => {
+                    setAnimation(undefined);
+                }}
             >
             </RNHoleView>
             <View
