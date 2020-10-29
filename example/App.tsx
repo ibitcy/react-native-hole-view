@@ -24,6 +24,8 @@ import {
 
 import {RNHole, RNHoleView, ERNHoleViewTimingFunction, IRNHoleViewAnimation} from "react-native-hole-view";
 
+import Video from 'react-native-video';
+
 const firstHole: RNHole = {x: 150, y: 390, width: 120, height: 120, borderRadius: 60};
 const secondHole: RNHole = {x: 150, y: 40, width: 120, height: 120, borderRadius: 60};
 
@@ -76,6 +78,7 @@ const App = () => {
                     setAnimation(undefined);
                 }}
             >
+                <Video source={{uri: 'http://clips.vorwaerts-gmbh.de/VfE_html5.mp4'}} style={{flex: 1}}/>
             </RNHoleView>
             <View
                 pointerEvents={'box-none'}
