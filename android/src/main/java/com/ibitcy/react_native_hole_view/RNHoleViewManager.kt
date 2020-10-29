@@ -25,13 +25,13 @@ class RNHoleViewManager(val reactContext: ReactApplicationContext): ViewGroupMan
         if (animation.hasKey("duration")) {
             duration = animation.getDouble("duration").toLong()
         }
-        var type: RNHoleView.EAnimationType? = null
-        if (animation.hasKey("type")) {
-            type = RNHoleView.EAnimationType.valueOf(animation.getString("type")!!)
+        var timingFunction: RNHoleView.EAnimationTimingFunction? = null
+        if (animation.hasKey("timingFunction")) {
+            timingFunction = RNHoleView.EAnimationTimingFunction.valueOf(animation.getString("timingFunction")!!)
         }
 
-        if (type != null) {
-            view.animation = RNHoleView.Animation(duration, type)
+        if (timingFunction != null) {
+            view.animation = RNHoleView.Animation(duration, timingFunction)
         }
     }
 

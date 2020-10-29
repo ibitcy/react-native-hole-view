@@ -50,6 +50,19 @@ android/gradlew
 android/gradlew.bat
 android/src/main/gen
 
+example/android/build/
+example/android/.idea
+example/android/.gradle
+example/android/local.properties
+example/android/*.iml
+
+example/android/android.iml
+example/android/gradle.properties
+example/android/gradle/
+example/android/gradlew
+example/android/gradlew.bat
+example/android/src/main/gen
+
 # BUCK
 buck-out/
 \.buckd/

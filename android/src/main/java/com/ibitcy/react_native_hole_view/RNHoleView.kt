@@ -28,11 +28,12 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
 
         private val sRectEvaluator = RectEvaluator()
 
-        private fun getAnimationInterpolator(type: EAnimationType): Interpolator {
+        private fun getAnimationInterpolator(type: EAnimationTimingFunction): Interpolator {
             return when (type) {
-                EAnimationType.EASE_IN -> AccelerateInterpolator()
-                EAnimationType.EASE_OUT -> DecelerateInterpolator()
-                EAnimationType.EASE_IN_OUT -> AccelerateDecelerateInterpolator()
+                EAnimationTimingFunction.LINEAR -> LinearInterpolator()
+                EAnimationTimingFunction.EASE_IN -> AccelerateInterpolator()
+                EAnimationTimingFunction.EASE_OUT -> DecelerateInterpolator()
+                EAnimationTimingFunction.EASE_IN_OUT -> AccelerateDecelerateInterpolator()
             }
         }
     }
@@ -51,10 +52,11 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
 
     class Animation(
             var duration: Long = ANIMATION_DURATION_DEFAULT,
-            var type: EAnimationType
+            var timingFunction: EAnimationTimingFunction
     )
     
-    enum class EAnimationType(val type: String) {
+    enum class EAnimationTimingFunction(val type: String) {
+        LINEAR("LINEAR"),
         EASE_IN("EASE_IN"),
         EASE_OUT("EASE_OUT"),
         EASE_IN_OUT("EASE_IN_OUT"),
@@ -115,7 +117,7 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
 
                     val holeAnimator: ObjectAnimator = ObjectAnimator.ofObject(hole, "rect",
                             sRectEvaluator, fromRect, toRect)
-                    holeAnimator.interpolator = getAnimationInterpolator(animation!!.type)
+                    holeAnimator.interpolator = getAnimationInterpolator(animation!!.timingFunction)
                     holeAnimator.addUpdateListener {
                         val value = it.animatedValue
                         value as Rect
