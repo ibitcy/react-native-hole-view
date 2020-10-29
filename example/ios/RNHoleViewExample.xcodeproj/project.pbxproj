@@ -194,7 +194,6 @@
 				C3147079C4CC492E07F9FD4B /* Pods-RNHoleViewExample-tvOSTests.debug.xcconfig */,
 				10DCEC7EF269C4B7564A5767 /* Pods-RNHoleViewExample-tvOSTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
