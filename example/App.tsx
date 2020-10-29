@@ -29,7 +29,7 @@ const App = () => {
     const [animated, setAnimated] = useState<boolean>(false);
 
     const firstHole: RNHole = {x: 150, y: 390, width: 120, height: 120, borderRadius: 60};
-    const secondHole: RNHole = {x: 150, y: 0, width: 120, height: 120, borderRadius: 60};
+    const secondHole: RNHole = {x: 150, y: 40, width: 120, height: 120, borderRadius: 60};
 
 
     const onPress = useCallback(() => {

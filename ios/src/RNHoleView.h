@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <React/RCTComponent.h>
 
 @interface RNHoleViewHole : NSObject
 
@@ -35,5 +36,7 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius;
 @property (nonatomic) NSArray <NSDictionary*> *holes;
 
 @property (nonatomic) NSDictionary *animation;
+
+@property (nonatomic, copy) RCTDirectEventBlock onAnimationFinished;
 
 @end

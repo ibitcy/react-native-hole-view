@@ -22,6 +22,8 @@ RCT_EXPORT_VIEW_PROPERTY(holes, NSArray)
 
 RCT_EXPORT_VIEW_PROPERTY(animation, NSDictionary)
 
+RCT_EXPORT_VIEW_PROPERTY(onAnimationFinished, RCTDirectEventBlock)
+
 -(UIView*)view{
     return [RNHoleView new];
 }
