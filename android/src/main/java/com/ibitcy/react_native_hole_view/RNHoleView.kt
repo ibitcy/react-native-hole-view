@@ -6,22 +6,21 @@ import android.animation.ObjectAnimator
 import android.animation.RectEvaluator
 import android.content.Context
 import android.graphics.*
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.*
 import android.view.animation.Interpolator
+import android.widget.FrameLayout
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.UIManagerModule
 import com.facebook.react.uimanager.events.EventDispatcher
 import com.facebook.react.uimanager.events.TouchEvent
 import com.facebook.react.uimanager.events.TouchEventCoalescingKeyHelper
 import com.facebook.react.uimanager.events.TouchEventType
-import com.facebook.react.views.view.ReactViewGroup
 
 
-class RNHoleView(context: Context) : ReactViewGroup(context) {
+class RNHoleView(context: Context) : FrameLayout(context) {
 
     companion object {
         const val ANIMATION_DURATION_DEFAULT = 1000L
@@ -54,7 +53,7 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
             var duration: Long = ANIMATION_DURATION_DEFAULT,
             var timingFunction: EAnimationTimingFunction
     )
-    
+
     enum class EAnimationTimingFunction(val type: String) {
         LINEAR("LINEAR"),
         EASE_IN("EASE_IN"),
@@ -79,12 +78,12 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
         val uiManager = (context as ReactContext).getNativeModule(UIManagerModule::class.java)
         mEventDispatcher = uiManager!!.eventDispatcher
     }
-    
+
     private val mHoles = ArrayList<Hole>()
 
     fun setHoles(holes: List<Hole>) {
         mHolesPath = Path()
-        
+
         val animatorList = arrayListOf<Animator>()
 
         holes.forEachIndexed { index, hole ->
@@ -173,6 +172,13 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
         }
     }
 
+    override fun dispatchDraw(canvas: Canvas?) {
+        super.dispatchDraw(canvas)
+        if (mHolesPath != null) {
+            canvas?.drawPath(mHolesPath!!, mHolesPaint)
+        }
+    }
+
     private fun isTouchInsideHole(touchX: Int, touchY: Int): Boolean {
         if (mHolesPath == null)
             return false
@@ -234,7 +240,9 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
                                     ev.eventTime,
                                     ev.x,
                                     ev.y,
-                                    TouchEventCoalescingKeyHelper()))
+                                    TouchEventCoalescingKeyHelper()
+                            )
+                    )
                 } catch (e: Exception) {}
                 if (child is ViewGroup && child.childCount > 0) {
                     passTouchEventToViewAndChildren(child, ev)
