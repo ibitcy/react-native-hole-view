@@ -185,3 +185,7 @@ cd ios && pod install
 
 By default RN doesn't support click through views on Android. The solution we [use](https://github.com/ibitcy/react-native-hole-view/blob/master/android/src/main/java/com/ibitcy/react_native_hole_view/RNHoleView.kt) is quite dirty, so please support our PR to FB's react-native repo
 https://github.com/facebook/react-native/pull/28956
+
+## Troubleshooting
+
+Is you have any diffuculties - please take a look on `example/` app first. 
