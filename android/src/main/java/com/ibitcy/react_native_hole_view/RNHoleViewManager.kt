@@ -1,22 +1,50 @@
 package com.ibitcy.react_native_hole_view
 
 import android.content.res.Resources
-import com.facebook.react.bridge.ReactApplicationContext
-import com.facebook.react.bridge.ReadableArray
-import com.facebook.react.bridge.ReadableMap
+import com.facebook.react.bridge.*
+import com.facebook.react.common.MapBuilder
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
+import com.facebook.react.uimanager.events.RCTEventEmitter
 import kotlin.math.roundToInt
 
-class RNHoleViewManager(val reactContext: ReactApplicationContext): ViewGroupManager<RNHoleView>() {
+class RNHoleViewManager(private val reactContext: ReactApplicationContext): ViewGroupManager<RNHoleView>() {
+
+    companion object {
+        const val EVENT_BUBBLED = "bubbled"
+
+        const val ON_ANIMATION_FINISHED = "onAnimationFinished"
+    }
 
     override fun getName(): String {
         return "RNHoleView"
     }
 
     override fun createViewInstance(reactContext: ThemedReactContext): RNHoleView {
-        return RNHoleView(reactContext)
+        val v = RNHoleView(reactContext)
+        v.onAnimationFinished = {
+            emitEvent(v, ON_ANIMATION_FINISHED, Arguments.createMap())
+        }
+        return v
+    }
+
+    override fun getExportedCustomBubblingEventTypeConstants(): MutableMap<String, Any> {
+        return MapBuilder.builder<String, Any>()
+                .put(ON_ANIMATION_FINISHED, MapBuilder.of(
+                                "phasedRegistrationNames",
+                                MapBuilder.of<Any, Any>(EVENT_BUBBLED, ON_ANIMATION_FINISHED)
+                        )
+                )
+                .build()
+    }
+
+    private fun emitEvent(view: RNHoleView, name: String, arguments: WritableMap) {
+        reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(
+                view.id,
+                name,
+                arguments
+        )
     }
 
     @ReactProp(name = "animation")

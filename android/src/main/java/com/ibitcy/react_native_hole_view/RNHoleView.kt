@@ -62,6 +62,7 @@ class RNHoleView(context: Context) : FrameLayout(context) {
     }
 
     var animation: Animation? = null
+    var onAnimationFinished: (() -> Unit)? = null
 
     private var mHolesPath: Path? = null
     private val mHolesPaint: Paint
@@ -158,6 +159,21 @@ class RNHoleView(context: Context) : FrameLayout(context) {
             val animatorSet = AnimatorSet()
             animatorSet.duration = animation!!.duration
             animatorSet.playTogether(animatorList)
+            animatorSet.addListener(object: Animator.AnimatorListener {
+                override fun onAnimationEnd(animation: Animator?) {
+                    onAnimationFinished?.invoke()
+                }
+
+                override fun onAnimationStart(animation: Animator?) {
+                }
+
+                override fun onAnimationCancel(animation: Animator?) {
+                }
+
+                override fun onAnimationRepeat(animation: Animator?) {
+                }
+
+            })
             animatorSet.start()
         }
 
