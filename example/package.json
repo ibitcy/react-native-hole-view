@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "react": "16.13.1",
-    "react-native": "0.63.3",
+    "react-native": "0.64.0",
     "react-native-hole-view": "../",
     "react-native-video": "^5.1.0-alpha8"
   },
