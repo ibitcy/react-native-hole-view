@@ -301,8 +301,8 @@ PODS:
     - React-Core (= 0.63.3)
     - React-cxxreact (= 0.63.3)
     - React-jsi (= 0.63.3)
-  - RNHoleView (1.1.0):
-    - React
+  - RNHoleView (2.0.2):
+    - React-Core
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
     - Yoga (~> 1.14)
@@ -469,10 +469,10 @@ SPEC CHECKSUMS:
   React-RCTText: 65a6de06a7389098ce24340d1d3556015c38f746
   React-RCTVibration: 8e9fb25724a0805107fc1acc9075e26f814df454
   ReactCommon: 4167844018c9ed375cc01a843e9ee564399e53c3
-  RNHoleView: 261133b62d2e405a427a098d5ebdaccfeaecc268
+  RNHoleView: 652ff7a6ba7ebbe52ffa79e51b8605e5d77b3180
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
 PODFILE CHECKSUM: 795a636f67b6d59ff59c90f3366c0c7348ce7afc
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1
