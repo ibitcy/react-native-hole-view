@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/ibitcy/react-native-hole-view", :tag => "master" }
   s.source_files = "ios/src/*.{h,m}"
   s.requires_arc     = true
-#   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
+  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
 
   s.dependency 'React-Core'
 end
