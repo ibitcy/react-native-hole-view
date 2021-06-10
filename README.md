@@ -189,3 +189,13 @@ https://github.com/facebook/react-native/pull/28956
 ## Troubleshooting
 
 Is you have any diffuculties - please take a look on `example/` app first. 
+  
+## Running the example:
+  
+  1. Clone the repo
+  2. `cd example`
+  3. `yarn`
+  4. `cd ios`
+  5. `pod install`
+  6. `cd ..`
+  7. `yarn run android` or `yarn run ios`
