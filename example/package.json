@@ -8,6 +8,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "preinstall": "rm -rf node_modules",
     "postinstall": "rm -rf node_modules/react-native-hole-view/node_modules"
   },
   "dependencies": {
