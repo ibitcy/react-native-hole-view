@@ -272,7 +272,7 @@ PODS:
     - React-cxxreact (= 0.64.0)
     - React-jsi (= 0.64.0)
     - React-perflogger (= 0.64.0)
-  - RNHoleView (2.0.2):
+  - RNHoleView (2.0.3):
     - React-Core
   - Yoga (1.14.0)
 
@@ -406,9 +406,9 @@ SPEC CHECKSUMS:
   React-RCTVibration: 0fd6b21751a33cb72fce1a4a33ab9678416d307a
   React-runtimeexecutor: cad74a1eaa53ee6e7a3620231939d8fe2c6afcf0
   ReactCommon: cfe2b7fd20e0dbd2d1185cd7d8f99633fbc5ff05
-  RNHoleView: 652ff7a6ba7ebbe52ffa79e51b8605e5d77b3180
+  RNHoleView: 9eab27c91eb62b70a32b033bff8a765ddb385ee1
   Yoga: 8c8436d4171c87504c648ae23b1d81242bdf3bbf
 
-PODFILE CHECKSUM: 24c1bcbe225de37bc5229a1a2f7e87cc16c33c6a
+PODFILE CHECKSUM: 91a0ec14c891d028fc15cf29d8fdb7de9037838c
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2
