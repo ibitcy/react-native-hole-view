@@ -48,18 +48,21 @@ class RNHoleViewManager(private val reactContext: ReactApplicationContext): View
     }
 
     @ReactProp(name = "animation")
-    fun setAnimation(view: RNHoleView, animation: ReadableMap) {
-        var duration = RNHoleView.ANIMATION_DURATION_DEFAULT
-        if (animation.hasKey("duration")) {
-            duration = animation.getDouble("duration").toLong()
-        }
-        var timingFunction: RNHoleView.EAnimationTimingFunction? = null
-        if (animation.hasKey("timingFunction")) {
-            timingFunction = RNHoleView.EAnimationTimingFunction.valueOf(animation.getString("timingFunction")!!)
-        }
+    fun setAnimation(view: RNHoleView, animation: ReadableMap?) {
+        if (animation != null) {
+            var duration = RNHoleView.ANIMATION_DURATION_DEFAULT
+            if (animation.hasKey("duration")) {
+                duration = animation.getDouble("duration").toLong()
+            }
+            var timingFunction: RNHoleView.EAnimationTimingFunction? = null
+            if (animation.hasKey("timingFunction")) {
+                timingFunction =
+                    RNHoleView.EAnimationTimingFunction.valueOf(animation.getString("timingFunction")!!)
+            }
 
-        if (timingFunction != null) {
-            view.animation = RNHoleView.Animation(duration, timingFunction)
+            if (timingFunction != null) {
+                view.animation = RNHoleView.Animation(duration, timingFunction)
+            }
         }
     }
 
