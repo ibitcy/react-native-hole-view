@@ -42,13 +42,14 @@ export interface IRNHoleView extends ViewProps {
     onAnimationFinished?: () => void;
 }
 
-export const RNHoleView: React.FC<IRNHoleView> = props => {
-    if (props.animation) {
-        props.animation.duration = props.animation.duration ? props.animation.duration : DEFAULT_DURATION;
-        props.animation.timingFunction = props.animation.timingFunction ? props.animation.timingFunction : ERNHoleViewTimingFunction.LINEAR;
-    }
+export const RNHoleView: React.FC<IRNHoleView> = ({animation, ...props}) => {
+    const animationProp = animation
+        ? {
+            duration: DEFAULT_DURATION,
+            timingFunction: ERNHoleViewTimingFunction.LINEAR,
+            ...animation,
+        }
+        : undefined;
 
-    return <RNHoleViewManager
-        {...props}
-    />;
+    return <RNHoleViewManager {...props} animation={animationProp} />;
 };

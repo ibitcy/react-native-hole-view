@@ -1,9 +1,20 @@
 "use strict";
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RNHoleView = exports.ERNHoleViewTimingFunction = exports.RNHole = void 0;
 const react_native_1 = require("react-native");
 const React = require("react");
-const RNHoleViewManager = react_native_1.requireNativeComponent('RNHoleView');
+const RNHoleViewManager = (0, react_native_1.requireNativeComponent)('RNHoleView');
 const DEFAULT_DURATION = 1000;
 const DEFAULT_RADIUS_VALUE = -1;
 class RNHole {
@@ -27,11 +38,11 @@ var ERNHoleViewTimingFunction;
     ERNHoleViewTimingFunction["EASE_OUT"] = "EASE_OUT";
     ERNHoleViewTimingFunction["EASE_IN_OUT"] = "EASE_IN_OUT";
 })(ERNHoleViewTimingFunction = exports.ERNHoleViewTimingFunction || (exports.ERNHoleViewTimingFunction = {}));
-exports.RNHoleView = props => {
-    if (props.animation) {
-        props.animation.duration = props.animation.duration ? props.animation.duration : DEFAULT_DURATION;
-        props.animation.timingFunction = props.animation.timingFunction ? props.animation.timingFunction : ERNHoleViewTimingFunction.LINEAR;
-    }
-    return React.createElement(RNHoleViewManager, Object.assign({}, props));
+const RNHoleView = (_a) => {
+    var { animation } = _a, props = __rest(_a, ["animation"]);
+    const animationProp = animation
+        ? Object.assign({ duration: DEFAULT_DURATION, timingFunction: ERNHoleViewTimingFunction.LINEAR }, animation) : undefined;
+    return React.createElement(RNHoleViewManager, Object.assign({}, props, { animation: animationProp }));
 };
+exports.RNHoleView = RNHoleView;
 //# sourceMappingURL=index.js.map
