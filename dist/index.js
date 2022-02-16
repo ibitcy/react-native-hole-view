@@ -38,11 +38,15 @@ var ERNHoleViewTimingFunction;
     ERNHoleViewTimingFunction["EASE_OUT"] = "EASE_OUT";
     ERNHoleViewTimingFunction["EASE_IN_OUT"] = "EASE_IN_OUT";
 })(ERNHoleViewTimingFunction = exports.ERNHoleViewTimingFunction || (exports.ERNHoleViewTimingFunction = {}));
-const RNHoleView = (_a) => {
-    var { animation } = _a, props = __rest(_a, ["animation"]);
+const RNHoleView = props => {
+    const { animation, holes, onAnimationFinished } = props, rest = __rest(props, ["animation", "holes", "onAnimationFinished"]);
     const animationProp = animation
-        ? Object.assign({ duration: DEFAULT_DURATION, timingFunction: ERNHoleViewTimingFunction.LINEAR }, animation) : undefined;
-    return React.createElement(RNHoleViewManager, Object.assign({}, props, { animation: animationProp }));
+        ? {
+            duration: typeof animation.duration === 'number' ? animation.duration : DEFAULT_DURATION,
+            timingFunction: animation.timingFunction || ERNHoleViewTimingFunction.LINEAR,
+        }
+        : undefined;
+    return (React.createElement(RNHoleViewManager, Object.assign({ holes: holes, animation: animationProp, onAnimationFinished: onAnimationFinished }, rest)));
 };
 exports.RNHoleView = RNHoleView;
 //# sourceMappingURL=index.js.map

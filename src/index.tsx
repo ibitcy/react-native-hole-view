@@ -1,10 +1,9 @@
-import {requireNativeComponent, View, ViewProps} from 'react-native';
+import { requireNativeComponent, ViewProps } from 'react-native';
 import * as React from 'react';
 
-const RNHoleViewManager = requireNativeComponent('RNHoleView');
+const RNHoleViewManager = requireNativeComponent<IRNHoleView>('RNHoleView');
 
 const DEFAULT_DURATION = 1000;
-
 const DEFAULT_RADIUS_VALUE = -1;
 
 export class RNHole {
@@ -42,14 +41,17 @@ export interface IRNHoleView extends ViewProps {
     onAnimationFinished?: () => void;
 }
 
-export const RNHoleView: React.FC<IRNHoleView> = ({animation, ...props}) => {
-    const animationProp = animation
-        ? {
-            duration: DEFAULT_DURATION,
-            timingFunction: ERNHoleViewTimingFunction.LINEAR,
-            ...animation,
-        }
-        : undefined;
+export const RNHoleView: React.FC<IRNHoleView> = props => {
+    const { animation, holes, onAnimationFinished, ...rest } = props;
 
-    return <RNHoleViewManager {...props} animation={animationProp} />;
+    const animationProp = animation
+      ? {
+          duration: typeof animation.duration === 'number' ? animation.duration : DEFAULT_DURATION,
+          timingFunction: animation.timingFunction || ERNHoleViewTimingFunction.LINEAR,
+      }
+      : undefined;
+
+    return (
+      <RNHoleViewManager holes={holes} animation={animationProp} onAnimationFinished={onAnimationFinished} {...rest} />
+    );
 };
