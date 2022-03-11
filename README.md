@@ -187,7 +187,13 @@ https://github.com/facebook/react-native/pull/28956
 
 ## Troubleshooting
 
-Is you have any diffuculties - please take a look on `example/` app first. 
+If you have any diffuculties - please take a look on `example/` app first. 
+
+In case you have xcode build error poining on this line
+```objectivec
+#import "RCTBridgeModule.h"
+```
+please use version 2.0.*
   
 ## Running the example:
   
