@@ -10,15 +10,12 @@ import com.facebook.react.uimanager.events.RCTEventEmitter
 import kotlin.math.roundToInt
 
 class RNHoleViewManager(private val reactContext: ReactApplicationContext): ViewGroupManager<RNHoleView>() {
+    override fun getName() = "RNHoleView"
 
     companion object {
         const val EVENT_BUBBLED = "bubbled"
 
         const val ON_ANIMATION_FINISHED = "onAnimationFinished"
-    }
-
-    override fun getName(): String {
-        return "RNHoleView"
     }
 
     override fun createViewInstance(reactContext: ThemedReactContext): RNHoleView {

@@ -11,17 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.*
 import android.view.animation.Interpolator
-import android.widget.FrameLayout
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.UIManagerModule
 import com.facebook.react.uimanager.events.EventDispatcher
 import com.facebook.react.uimanager.events.TouchEvent
 import com.facebook.react.uimanager.events.TouchEventCoalescingKeyHelper
 import com.facebook.react.uimanager.events.TouchEventType
+import com.facebook.react.views.view.ReactViewGroup
 
 
-class RNHoleView(context: Context) : FrameLayout(context) {
-
+class RNHoleView(context: Context) : ReactViewGroup(context) {
     companion object {
         const val ANIMATION_DURATION_DEFAULT = 1000L
 
