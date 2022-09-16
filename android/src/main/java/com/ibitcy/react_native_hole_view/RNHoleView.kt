@@ -159,17 +159,17 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
             animatorSet.duration = animation!!.duration
             animatorSet.playTogether(animatorList)
             animatorSet.addListener(object: Animator.AnimatorListener {
-                override fun onAnimationEnd(animation: Animator?) {
+                override fun onAnimationEnd(animation: Animator) {
                     onAnimationFinished?.invoke()
                 }
 
-                override fun onAnimationStart(animation: Animator?) {
+                override fun onAnimationStart(animation: Animator) {
                 }
 
-                override fun onAnimationCancel(animation: Animator?) {
+                override fun onAnimationCancel(animation: Animator) {
                 }
 
-                override fun onAnimationRepeat(animation: Animator?) {
+                override fun onAnimationRepeat(animation: Animator) {
                 }
 
             })
