@@ -5,7 +5,7 @@
 
 ## How it works
 
-<img src="misc/demo1.gif" alt="drawing" height="500"/>
+<img src="misc/demo1.gif" alt="drawing" width="245" height="500"/>
 
 <details>
 <summary>code</summary>
@@ -35,7 +35,7 @@ import { RNHoleView } from 'react-native-hole-view';
 
 Works with any nested views:
 
-<img src="misc/demo2.gif" alt="drawing" height="500"/>
+<img src="misc/demo2.gif" alt="drawing" width="245" height="500"/>
 
 <details>
 <summary>code</summary>
@@ -67,7 +67,7 @@ import Video from 'react-native-video';
 
 Can be animated:
 
-<img src="misc/demo3.gif" alt="drawing" height="500"/>
+<img src="misc/demo3.gif" alt="drawing" width="460" height="500"/>
 
 <details>
 <summary>code</summary>
