@@ -51,5 +51,10 @@
   "bugs": {
     "url": "https://github.com/ibitcy/react-native-hole-view/issues"
   },
-  "homepage": "https://github.com/ibitcy/react-native-hole-view#readme"
+  "homepage": "https://github.com/ibitcy/react-native-hole-view#readme",
+  "codegenConfig": {
+    "name": "RNHoleView",
+    "type": "components",
+    "jsSrcsDir": "."
+  }
 }

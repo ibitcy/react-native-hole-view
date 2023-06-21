@@ -1,7 +1,11 @@
 import { requireNativeComponent, ViewProps } from 'react-native';
 import * as React from 'react';
 
-const RNHoleViewManager = requireNativeComponent<IRNHoleView>('RNHoleView');
+const isFabricEnabled = global.nativeFabricUIManager != null;
+
+const RNHoleViewManager = isFabricEnabled ?
+     require("./RNHoleViewNativeComponent").default :
+     requireNativeComponent<IRNHoleView>('RNHoleView');
 
 const DEFAULT_DURATION = 1000;
 const DEFAULT_RADIUS_VALUE = -1;

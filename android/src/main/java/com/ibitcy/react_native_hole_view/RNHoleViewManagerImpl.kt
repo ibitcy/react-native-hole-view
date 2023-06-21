@@ -1,51 +1,30 @@
 package com.ibitcy.react_native_hole_view
 
 import android.content.res.Resources
+
 import com.facebook.react.bridge.*
 import com.facebook.react.common.MapBuilder
+import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.uimanager.ThemedReactContext
 import com.facebook.react.uimanager.ViewGroupManager
 import com.facebook.react.uimanager.annotations.ReactProp
 import com.facebook.react.uimanager.events.RCTEventEmitter
+import com.facebook.react.uimanager.ViewManagerDelegate
+
+import com.ibitcy.react_native_hole_view.events.AnimFinishEvent
+
 import kotlin.math.roundToInt
 
-class RNHoleViewManager(private val reactContext: ReactApplicationContext): ViewGroupManager<RNHoleView>() {
-    override fun getName() = "RNHoleView"
+class RNHoleViewManagerImpl(reactContext: ReactApplicationContext) {
+    
+    val reactContext: ReactApplicationContext = reactContext
 
     companion object {
-        const val EVENT_BUBBLED = "bubbled"
-
-        const val ON_ANIMATION_FINISHED = "onAnimationFinished"
+        public const val NAME = "RNHoleView"
+        public const val ON_ANIMATION_FINISHED = "onAnimationFinished"
     }
 
-    override fun createViewInstance(reactContext: ThemedReactContext): RNHoleView {
-        val v = RNHoleView(reactContext)
-        v.onAnimationFinished = {
-            emitEvent(v, ON_ANIMATION_FINISHED, Arguments.createMap())
-        }
-        return v
-    }
-
-    override fun getExportedCustomBubblingEventTypeConstants(): MutableMap<String, Any> {
-        return MapBuilder.builder<String, Any>()
-                .put(ON_ANIMATION_FINISHED, MapBuilder.of(
-                                "phasedRegistrationNames",
-                                MapBuilder.of<Any, Any>(EVENT_BUBBLED, ON_ANIMATION_FINISHED)
-                        )
-                )
-                .build()
-    }
-
-    private fun emitEvent(view: RNHoleView, name: String, arguments: WritableMap) {
-        reactContext.getJSModule(RCTEventEmitter::class.java).receiveEvent(
-                view.id,
-                name,
-                arguments
-        )
-    }
-
-    @ReactProp(name = "animation")
-    fun setAnimation(view: RNHoleView, animation: ReadableMap?) {
+    public fun setAnimation(view: RNHoleView, animation: ReadableMap?) {
         if (animation != null) {
             var duration = RNHoleView.ANIMATION_DURATION_DEFAULT
             if (animation.hasKey("duration")) {
@@ -63,9 +42,8 @@ class RNHoleViewManager(private val reactContext: ReactApplicationContext): View
         }
     }
 
-    @ReactProp(name = "holes")
-    fun setHoles(view: RNHoleView, holesArg: ReadableArray) {
-        if (holesArg.size() == 0) {
+    public fun setHoles(view: RNHoleView, holesArg: ReadableArray?) {
+        if (holesArg == null || holesArg.size() == 0) {
             return
         }
 
