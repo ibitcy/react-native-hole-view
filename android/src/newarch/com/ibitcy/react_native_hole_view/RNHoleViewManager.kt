@@ -32,7 +32,6 @@ class RNHoleViewManager(val reactContext: ReactApplicationContext): ViewGroupMan
     override fun createViewInstance(reactContext: ThemedReactContext): RNHoleView {
         val v = RNHoleView(reactContext)
         v.onAnimationFinished = {
-            // impl.onAnimationFinished(v)
             val event = AnimFinishEvent(v.id)
             val eventDispatcher: EventDispatcher? =
                 UIManagerHelper.getEventDispatcherForReactTag(reactContext, v.id)

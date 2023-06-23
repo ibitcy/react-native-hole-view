@@ -1,12 +1,12 @@
 //
-//  RNHoleView.m
+//  RNHoleViewImpl.m
 //  RNHoleViewProject
 //
 //  Created by Stepan Kopylov on 20/05/2020.
 //  Copyright © 2020 Stepan Kopylov. All rights reserved.
 //
 
-#import "RNHoleView.h"
+#import "RNHoleViewImpl.h"
 
 #define degreesToRadians(x) ((x) * M_PI / 180.0)
 
@@ -40,7 +40,7 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 @end
 
 
-@interface RNHoleView()<CAAnimationDelegate>
+@interface RNHoleViewImpl()<CAAnimationDelegate>
 
 @property (nonatomic) CAShapeLayer *maskLayer;
 @property (nonatomic) UIBezierPath *maskPath;
@@ -52,7 +52,7 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 
 @end
 
-@implementation RNHoleView
+@implementation RNHoleViewImpl
 
 - (instancetype)init
 {

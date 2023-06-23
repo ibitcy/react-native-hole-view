@@ -258,7 +258,8 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
                                     TouchEventCoalescingKeyHelper()
                             )
                     )
-                } catch (e: Exception) {}
+                } catch (e: Exception) {
+                }
                 if (child is ViewGroup && child.childCount > 0) {
                     passTouchEventToViewAndChildren(child, ev)
                 }

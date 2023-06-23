@@ -1,4 +1,5 @@
 require 'json'
+
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
 Pod::Spec.new do |s|
@@ -13,23 +14,23 @@ Pod::Spec.new do |s|
   s.platforms    = { :ios => "9.0", :tvos => "9.2" }
   s.ios.deployment_target = "9.0"
   s.source       = { :git => "https://github.com/ibitcy/react-native-hole-view", :tag => "master" }
-  s.source_files = "ios/src/*.{h,m}"
+  s.source_files = "ios/src/*.{h,m,mm}"
   s.requires_arc     = true
 #   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
 
   s.dependency 'React-Core'
 
-  if ENV['RCT_NEW_ARCH_ENABLED'] == '1' then
-    s.compiler_flags = folly_compiler_flags + " -DRCT_NEW_ARCH_ENABLED=1"
+  if ENV["RCT_NEW_ARCH_ENABLED"] == "1"
+    s.compiler_flags = folly_flags + " -DRCT_NEW_ARCH_ENABLED=1"
     s.pod_target_xcconfig    = {
-        "HEADER_SEARCH_PATHS" => "\"$(PODS_ROOT)/boost\"",
-        "OTHER_CPLUSPLUSFLAGS" => "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1",
-        "CLANG_CXX_LANGUAGE_STANDARD" => "c++17"
+      "HEADER_SEARCH_PATHS" => "\"$(PODS_ROOT)/boost\"",
+      "OTHER_CPLUSPLUSFLAGS" => "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1",
+      "CLANG_CXX_LANGUAGE_STANDARD" => "c++17"
     }
 
-    s.dependency "React-RCTFabric"
     s.dependency "React-Codegen"
-    s.dependency "RCT-Folly", folly_version
+    s.dependency "React-RCTFabric"
+    s.dependency "RCT-Folly"
     s.dependency "RCTRequired"
     s.dependency "RCTTypeSafety"
     s.dependency "ReactCommon/turbomodule/core"

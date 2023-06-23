@@ -1,42 +1,25 @@
 //
 //  RNHoleView.h
-//  RNHoleViewProject
+//  RNHoleView
 //
-//  Created by Stepan Kopylov on 20/05/2020.
-//  Copyright © 2020 Stepan Kopylov. All rights reserved.
+//  Created by Thomas FETIVEAU on 22/06/2023.
+//  Copyright © 2023 Stepan Kopylov. All rights reserved.
 //
 
+// This guard prevent the code from being compiled in the old architecture
+#ifdef RCT_NEW_ARCH_ENABLED
+#import <React/RCTViewComponentView.h>
 #import <UIKit/UIKit.h>
-#import <React/RCTComponent.h>
 
-@interface RNHoleViewHole : NSObject
+#ifndef NativeComponentExampleComponentView_h
+#define NativeComponentExampleComponentView_h
 
-@property (nonatomic) CGRect rect;
-@property (nonatomic) CGFloat borderRadius;
-@property (nonatomic) CGFloat borderTopLeftRadius;
-@property (nonatomic) CGFloat borderTopRightRadius;
-@property (nonatomic) CGFloat borderBottomLeftRadius;
-@property (nonatomic) CGFloat borderBottomRightRadius;
+NS_ASSUME_NONNULL_BEGIN
 
-- (instancetype)initWitnX:(CGFloat)x y:(CGFloat)y
-					width:(CGFloat)width
-				   height:(CGFloat)height
-		  andBorderRadius:(CGFloat)borderRadius
-   andBorderTopLeftRadius:(CGFloat)borderTopLeftRadius
-  andBorderTopRightRadius:(CGFloat)borderTopRightRadius
-andBorderBottomLeftRadius:(CGFloat)borderBottomLeftRadius
-andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius;
-
+@interface RNHoleView : RCTViewComponentView
 @end
 
-@interface RNHoleView : UIView
+NS_ASSUME_NONNULL_END
 
-@property (nonatomic) NSArray <RNHoleViewHole*> *parsedHoles;
-
-@property (nonatomic) NSArray <NSDictionary*> *holes;
-
-@property (nonatomic) NSDictionary *animation;
-
-@property (nonatomic, copy) RCTDirectEventBlock onAnimationFinished;
-
-@end
+#endif /* NativeComponentExampleComponentView_h */
+#endif /* RCT_NEW_ARCH_ENABLED */
