@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.view.animation.*
 import android.view.animation.Interpolator
 import com.facebook.react.bridge.ReactContext
+import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.uimanager.UIManagerModule
 import com.facebook.react.uimanager.events.EventDispatcher
 import com.facebook.react.uimanager.events.TouchEvent
@@ -66,17 +67,12 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
     private var mHolesPath: Path? = null
     private val mHolesPaint: Paint
 
-    private val mEventDispatcher: EventDispatcher
-
     init {
         this.setLayerType(View.LAYER_TYPE_HARDWARE, null)
 
         mHolesPaint = Paint()
         mHolesPaint.color = Color.TRANSPARENT
         mHolesPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
-
-        val uiManager = (context as ReactContext).getNativeModule(UIManagerModule::class.java)
-        mEventDispatcher = uiManager!!.eventDispatcher
     }
 
     private val mHoles = ArrayList<Hole>()
@@ -247,8 +243,10 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
             val child = v.getChildAt(i)
             if (child.id > 0 && isViewInsideTouch(ev, child) && child.visibility == View.VISIBLE) {
                 try {
-                    mEventDispatcher.dispatchEvent(
+                    val mmEventDispatcher = UIManagerHelper.getEventDispatcherForReactTag((context as ReactContext), child.id) ;
+                    mmEventDispatcher!!.dispatchEvent(
                             TouchEvent.obtain(
+                                    UIManagerHelper.getSurfaceId(child),
                                     child.id,
                                     TouchEventType.START,
                                     ev,
