@@ -5,16 +5,16 @@
     "sourceMap": true,
     "outDir": "./dist",
     "declaration": true,
-    "jsx": "react",
+    "jsx": "react-native",
     "target": "es6",
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "noImplicitAny": false,
     "typeRoots": [
       "./node_modules/@types/"
-    ]
+    ],
   },
-  "exclude": [
-    "example"
+  "include": [
+    "./src"
   ]
 }

@@ -17,7 +17,7 @@
     "ios",
     "src",
     "dist",
-    "RNHoleView.podspec"
+    "react-native-hole-view.podspec"
   ],
   "keywords": [
     "react-native",
@@ -36,8 +36,8 @@
   "author": "ibitcy",
   "license": "ISC",
   "devDependencies": {
-    "install-peers-cli": "^2.2.0",
-    "typescript": "^4.2.4"
+    "install-peers-cli": "2.2.0",
+    "typescript": "4.2.4"
   },
   "peerDependencies": {
     "react": "*",
@@ -55,6 +55,6 @@
   "codegenConfig": {
     "name": "RNHoleView",
     "type": "components",
-    "jsSrcsDir": "."
+    "jsSrcsDir": "./src/codegenSpec"
   }
 }

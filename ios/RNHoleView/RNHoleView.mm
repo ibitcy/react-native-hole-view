@@ -25,7 +25,6 @@ using namespace facebook::react;
 @end
 
 @implementation RNHoleView {
-    //UIView * _view;
     RNHoleViewImpl * _view;
 }
 
@@ -41,6 +40,7 @@ using namespace facebook::react;
         _props = defaultProps;
 
         _view = [RNHoleViewImpl new];
+        
         self.contentView = _view;
     }
      
@@ -54,7 +54,7 @@ using namespace facebook::react;
 
     NSMutableArray *holes = [[NSMutableArray alloc] init];
     auto newHolesIt = newViewProps.holes.begin();
-    auto diff = 0;
+    
     while (newHolesIt != newViewProps.holes.end()) {
         [holes addObject: [self holeStructoDictionary: *newHolesIt]];
         newHolesIt++;
@@ -79,13 +79,23 @@ using namespace facebook::react;
     [super updateProps:props oldProps:oldProps];
 }
 
+- (void)mountChildComponentView:(UIView<RCTComponentViewProtocol> *)childComponentView index:(NSInteger)index
+{
+    [_view mountChildComponentView:childComponentView index:index];
+}
+
+- (void)unmountChildComponentView:(UIView<RCTComponentViewProtocol> *)childComponentView index:(NSInteger)index
+{
+    [_view unmountChildComponentView:childComponentView index:index];
+}
+
 Class<RCTComponentViewProtocol> RNHoleViewCls(void)
 {
     return RNHoleView.class;
 }
 
 - holeStructoDictionary:(facebook::react::RNHoleViewHolesStruct) holeStruct
-{   
+{
     return @{
         @"height": [NSNumber numberWithInt:holeStruct.height],
         @"width": [NSNumber numberWithInt:holeStruct.width],
@@ -93,6 +103,7 @@ Class<RCTComponentViewProtocol> RNHoleViewCls(void)
         @"y": [NSNumber numberWithInt:holeStruct.y],
         @"borderRadius": [NSNumber numberWithInt:holeStruct.borderRadius],
         @"isRTL": [NSNumber numberWithInt:holeStruct.isRTL], // boolean
+        /*
         @"borderTopLeftRadius": [NSNumber numberWithInt:holeStruct.borderTopLeftRadius],
         @"borderTopRightRadius": [NSNumber numberWithInt:holeStruct.borderTopRightRadius],
         @"borderBottomLeftRadius": [NSNumber numberWithInt:holeStruct.borderBottomLeftRadius],
@@ -101,6 +112,7 @@ Class<RCTComponentViewProtocol> RNHoleViewCls(void)
         @"borderTopEndRadius": [NSNumber numberWithInt:holeStruct.borderTopEndRadius],
         @"borderBottomStartRadius": [NSNumber numberWithInt:holeStruct.borderBottomStartRadius],
         @"borderBottomEndRadius": [NSNumber numberWithInt:holeStruct.borderBottomEndRadius]
+         */
     };
 }
 

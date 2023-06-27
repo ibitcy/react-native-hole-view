@@ -6,7 +6,10 @@
 //  Copyright © 2020 Stepan Kopylov. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <React/RCTBridgeModule.h>
 #import <React/RCTViewManager.h>
+
 #import "RNHoleViewImpl.h"
 
 @interface RNHoleViewManager : RCTViewManager

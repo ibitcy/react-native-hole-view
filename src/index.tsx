@@ -4,7 +4,7 @@ import * as React from 'react';
 const isFabricEnabled = global.nativeFabricUIManager != null;
 
 const RNHoleViewManager = isFabricEnabled ?
-     require("./RNHoleViewNativeComponent").default :
+     require("./codegenSpec/RNHoleViewNativeComponent").default :
      requireNativeComponent<IRNHoleView>('RNHoleView');
 
 const DEFAULT_DURATION = 1000;
