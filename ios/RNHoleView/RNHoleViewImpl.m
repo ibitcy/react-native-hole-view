@@ -278,6 +278,9 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 		if(self.onAnimationFinished){
 			self.onAnimationFinished(NULL);
 		}
+        if(self.onAnimationFinishedFabric){
+            self.onAnimationFinishedFabric();
+        }
 	}
 }
 

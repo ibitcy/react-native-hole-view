@@ -29,6 +29,8 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius;
 
 @end
 
+typedef void(^AnimationFinishedCallback)();
+
 @interface RNHoleViewImpl : UIView
 
 @property (nonatomic) NSArray <RNHoleViewHole*> *parsedHoles;
@@ -38,5 +40,7 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius;
 @property (nonatomic) NSDictionary *animation;
 
 @property (nonatomic, copy) RCTDirectEventBlock onAnimationFinished;
+
+@property (nonatomic, copy) AnimationFinishedCallback onAnimationFinishedFabric;
 
 @end
