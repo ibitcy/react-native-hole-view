@@ -9,8 +9,7 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "update_src": "sh refreshSrc.sh" ,
-    "preinstall": "sh refreshLib.sh" ,
-    "postinstall": "rm -rf node_modules/react-native-hole-view/node_modules && rm -rf node_modules/react-native-hole-view/example"
+    "postinstall": "sh refreshLib.sh"
   },
   "dependencies": {
     "@types/react-native-video": "^5.0.15",
