@@ -3,36 +3,38 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		794722BE24771883009D8E6C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 794722BD24771883009D8E6C /* AppDelegate.m */; };
-		794722C124771883009D8E6C /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 794722C024771883009D8E6C /* SceneDelegate.m */; };
-		794722C424771883009D8E6C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 794722C324771883009D8E6C /* ViewController.m */; };
-		794722C724771883009D8E6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 794722C524771883009D8E6C /* Main.storyboard */; };
-		794722C924771885009D8E6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794722C824771885009D8E6C /* Assets.xcassets */; };
-		794722CC24771885009D8E6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 794722CA24771885009D8E6C /* LaunchScreen.storyboard */; };
-		794722CF24771885009D8E6C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 794722CE24771885009D8E6C /* main.m */; };
+		E45373BA2A49CD9A00E8B3C7 /* RNHoleViewManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = E45373B42A49CD9A00E8B3C7 /* RNHoleViewManager.mm */; };
+		E45373BB2A49CD9A00E8B3C7 /* RNHoleViewImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = E45373B52A49CD9A00E8B3C7 /* RNHoleViewImpl.m */; };
+		E45373BD2A49CD9A00E8B3C7 /* RNHoleView.mm in Sources */ = {isa = PBXBuildFile; fileRef = E45373B82A49CD9A00E8B3C7 /* RNHoleView.mm */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		E45373A62A49CD2300E8B3C7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		794722B924771883009D8E6C /* RNHoleView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RNHoleView.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		794722BC24771883009D8E6C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		794722BD24771883009D8E6C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		794722BF24771883009D8E6C /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		794722C024771883009D8E6C /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		794722C224771883009D8E6C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		794722C324771883009D8E6C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		794722C624771883009D8E6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		794722C824771885009D8E6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		794722CB24771885009D8E6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		794722CD24771885009D8E6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		794722CE24771885009D8E6C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E45373A82A49CD2300E8B3C7 /* libRNHoleView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNHoleView.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E45373B42A49CD9A00E8B3C7 /* RNHoleViewManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RNHoleViewManager.mm; sourceTree = "<group>"; };
+		E45373B52A49CD9A00E8B3C7 /* RNHoleViewImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNHoleViewImpl.m; sourceTree = "<group>"; };
+		E45373B72A49CD9A00E8B3C7 /* RNHoleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNHoleView.h; sourceTree = "<group>"; };
+		E45373B82A49CD9A00E8B3C7 /* RNHoleView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RNHoleView.mm; sourceTree = "<group>"; };
+		E45373B92A49CD9A00E8B3C7 /* RNHoleViewImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNHoleViewImpl.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		794722B624771883009D8E6C /* Frameworks */ = {
+		E45373A52A49CD2300E8B3C7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,36 +44,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		794722B024771883009D8E6C = {
+		E453739F2A49CD2300E8B3C7 = {
 			isa = PBXGroup;
 			children = (
-				794722BB24771883009D8E6C /* RNHoleView */,
-				794722BA24771883009D8E6C /* Products */,
+				E45373AA2A49CD2300E8B3C7 /* RNHoleView */,
+				E45373A92A49CD2300E8B3C7 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		794722BA24771883009D8E6C /* Products */ = {
+		E45373A92A49CD2300E8B3C7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				794722B924771883009D8E6C /* RNHoleView.app */,
+				E45373A82A49CD2300E8B3C7 /* libRNHoleView.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		794722BB24771883009D8E6C /* RNHoleView */ = {
+		E45373AA2A49CD2300E8B3C7 /* RNHoleView */ = {
 			isa = PBXGroup;
 			children = (
-				794722BC24771883009D8E6C /* AppDelegate.h */,
-				794722BD24771883009D8E6C /* AppDelegate.m */,
-				794722BF24771883009D8E6C /* SceneDelegate.h */,
-				794722C024771883009D8E6C /* SceneDelegate.m */,
-				794722C224771883009D8E6C /* ViewController.h */,
-				794722C324771883009D8E6C /* ViewController.m */,
-				794722C524771883009D8E6C /* Main.storyboard */,
-				794722C824771885009D8E6C /* Assets.xcassets */,
-				794722CA24771885009D8E6C /* LaunchScreen.storyboard */,
-				794722CD24771885009D8E6C /* Info.plist */,
-				794722CE24771885009D8E6C /* main.m */,
+				E45373B72A49CD9A00E8B3C7 /* RNHoleView.h */,
+				E45373B82A49CD9A00E8B3C7 /* RNHoleView.mm */,
+				E45373B92A49CD9A00E8B3C7 /* RNHoleViewImpl.h */,
+				E45373B52A49CD9A00E8B3C7 /* RNHoleViewImpl.m */,
+				E45373B42A49CD9A00E8B3C7 /* RNHoleViewManager.mm */,
 			);
 			path = RNHoleView;
 			sourceTree = "<group>";
@@ -79,13 +75,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		794722B824771883009D8E6C /* RNHoleView */ = {
+		E45373A72A49CD2300E8B3C7 /* RNHoleView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 794722D224771885009D8E6C /* Build configuration list for PBXNativeTarget "RNHoleView" */;
+			buildConfigurationList = E45373B12A49CD2300E8B3C7 /* Build configuration list for PBXNativeTarget "RNHoleView" */;
 			buildPhases = (
-				794722B524771883009D8E6C /* Sources */,
-				794722B624771883009D8E6C /* Frameworks */,
-				794722B724771883009D8E6C /* Resources */,
+				E45373A42A49CD2300E8B3C7 /* Sources */,
+				E45373A52A49CD2300E8B3C7 /* Frameworks */,
+				E45373A62A49CD2300E8B3C7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -93,96 +89,62 @@
 			);
 			name = RNHoleView;
 			productName = RNHoleView;
-			productReference = 794722B924771883009D8E6C /* RNHoleView.app */;
-			productType = "com.apple.product-type.application";
+			productReference = E45373A82A49CD2300E8B3C7 /* libRNHoleView.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		794722B124771883009D8E6C /* Project object */ = {
+		E45373A02A49CD2300E8B3C7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1140;
-				ORGANIZATIONNAME = "Stepan Kopylov";
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
-					794722B824771883009D8E6C = {
-						CreatedOnToolsVersion = 11.4.1;
+					E45373A72A49CD2300E8B3C7 = {
+						CreatedOnToolsVersion = 14.3.1;
 					};
 				};
 			};
-			buildConfigurationList = 794722B424771883009D8E6C /* Build configuration list for PBXProject "RNHoleView" */;
-			compatibilityVersion = "Xcode 9.3";
+			buildConfigurationList = E45373A32A49CD2300E8B3C7 /* Build configuration list for PBXProject "RNHoleView" */;
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 794722B024771883009D8E6C;
-			productRefGroup = 794722BA24771883009D8E6C /* Products */;
+			mainGroup = E453739F2A49CD2300E8B3C7;
+			productRefGroup = E45373A92A49CD2300E8B3C7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				794722B824771883009D8E6C /* RNHoleView */,
+				E45373A72A49CD2300E8B3C7 /* RNHoleView */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		794722B724771883009D8E6C /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				794722CC24771885009D8E6C /* LaunchScreen.storyboard in Resources */,
-				794722C924771885009D8E6C /* Assets.xcassets in Resources */,
-				794722C724771883009D8E6C /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		794722B524771883009D8E6C /* Sources */ = {
+		E45373A42A49CD2300E8B3C7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				794722C424771883009D8E6C /* ViewController.m in Sources */,
-				794722BE24771883009D8E6C /* AppDelegate.m in Sources */,
-				794722CF24771885009D8E6C /* main.m in Sources */,
-				794722C124771883009D8E6C /* SceneDelegate.m in Sources */,
+				E45373BA2A49CD9A00E8B3C7 /* RNHoleViewManager.mm in Sources */,
+				E45373BB2A49CD9A00E8B3C7 /* RNHoleViewImpl.m in Sources */,
+				E45373BD2A49CD9A00E8B3C7 /* RNHoleView.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		794722C524771883009D8E6C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				794722C624771883009D8E6C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		794722CA24771885009D8E6C /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				794722CB24771885009D8E6C /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
-		794722D024771885009D8E6C /* Debug */ = {
+		E45373AF2A49CD2300E8B3C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -201,6 +163,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -225,7 +188,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -233,14 +196,13 @@
 			};
 			name = Debug;
 		};
-		794722D124771885009D8E6C /* Release */ = {
+		E45373B02A49CD2300E8B3C7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -259,6 +221,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -277,7 +240,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -285,34 +248,26 @@
 			};
 			name = Release;
 		};
-		794722D324771885009D8E6C /* Debug */ = {
+		E45373B22A49CD2300E8B3C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = RNHoleView/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = ibit.RNHoleView;
+				DEVELOPMENT_TEAM = S79LAJQZ8Y;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		794722D424771885009D8E6C /* Release */ = {
+		E45373B32A49CD2300E8B3C7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = RNHoleView/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = ibit.RNHoleView;
+				DEVELOPMENT_TEAM = S79LAJQZ8Y;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -320,25 +275,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		794722B424771883009D8E6C /* Build configuration list for PBXProject "RNHoleView" */ = {
+		E45373A32A49CD2300E8B3C7 /* Build configuration list for PBXProject "RNHoleView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				794722D024771885009D8E6C /* Debug */,
-				794722D124771885009D8E6C /* Release */,
+				E45373AF2A49CD2300E8B3C7 /* Debug */,
+				E45373B02A49CD2300E8B3C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		794722D224771885009D8E6C /* Build configuration list for PBXNativeTarget "RNHoleView" */ = {
+		E45373B12A49CD2300E8B3C7 /* Build configuration list for PBXNativeTarget "RNHoleView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				794722D324771885009D8E6C /* Debug */,
-				794722D424771885009D8E6C /* Release */,
+				E45373B22A49CD2300E8B3C7 /* Debug */,
+				E45373B32A49CD2300E8B3C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 794722B124771883009D8E6C /* Project object */;
+	rootObject = E45373A02A49CD2300E8B3C7 /* Project object */;
 }

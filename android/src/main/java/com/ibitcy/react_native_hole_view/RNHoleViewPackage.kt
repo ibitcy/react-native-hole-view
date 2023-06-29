@@ -6,12 +6,11 @@ import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.uimanager.ViewManager
 
 class RNHoleViewPackage: ReactPackage {
-    override fun createNativeModules(reactContext: ReactApplicationContext): MutableList<NativeModule> {
-        return mutableListOf(RNHoleViewModule(reactContext))
-    }
 
-    override fun createViewManagers(reactContext: ReactApplicationContext): MutableList<ViewManager<*, *>> {
-        return mutableListOf(RNHoleViewManager(reactContext))
-    }
+    override fun createViewManagers(reactContext: ReactApplicationContext): List<ViewManager<*, *>> =
+        listOf(RNHoleViewManager(reactContext))
+
+    override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> =
+        emptyList()
 
 }
