@@ -8,7 +8,7 @@ const RNHoleViewManager = isFabricEnabled ?
      requireNativeComponent<IRNHoleView>('RNHoleView');
 
 const DEFAULT_DURATION = 1000;
-const DEFAULT_RADIUS_VALUE = 0;
+const DEFAULT_RADIUS_VALUE = -1;
 
 export class RNHole {
     height: number;

@@ -68,57 +68,57 @@ class RNHoleViewManagerImpl(reactContext: ReactApplicationContext) {
             }
 
             val borderTopLeftRadius = try {
-                val value = hole.getInt("borderTopLeftRadius").dpToPx()
-                if (value == -1) borderRadius else value
+                val value = hole.getInt("borderTopLeftRadius")
+                if (value == -1) borderRadius else value.dpToPx()
             } catch(e: Exception) {
                 borderRadius
             }
 
             val borderTopRightRadius = try {
-                val value = hole.getInt("borderTopRightRadius").dpToPx()
-                if (value == -1) borderRadius else value
+                val value = hole.getInt("borderTopRightRadius")
+                if (value == -1) borderRadius else value.dpToPx()
             } catch(e: Exception) {
                 borderRadius
             }
 
             val borderBottomLeftRadius = try {
-                val value = hole.getInt("borderBottomLeftRadius").dpToPx()
-                if (value == -1) borderRadius else value
+                val value = hole.getInt("borderBottomLeftRadius")
+                if (value == -1) borderRadius else value.dpToPx()
             } catch(e: Exception) {
                 borderRadius
             }
 
             val borderBottomRightRadius = try {
-                val value = hole.getInt("borderBottomRightRadius").dpToPx()
-                if (value == -1) borderRadius else value
+                val value = hole.getInt("borderBottomRightRadius")
+                if (value == -1) borderRadius else value.dpToPx()
             } catch(e: Exception) {
                 borderRadius
             }
 
             val borderBottomStartRadius = try {
-                val value = hole.getInt("borderBottomStartRadius").dpToPx()
-                if (value == -1) borderRadius else value
+                val value = hole.getInt("borderBottomStartRadius")
+                if (value == -1) borderRadius else value.dpToPx()
             } catch (e: Exception) {
                 if (isRTL) borderBottomRightRadius else borderBottomLeftRadius
             }
 
             val borderBottomEndRadius = try {
-                val value = hole.getInt("borderBottomEndRadius").dpToPx()
-                if (value == -1) borderRadius else value
+                val value = hole.getInt("borderBottomEndRadius")
+                if (value == -1) borderRadius else value.dpToPx()
             } catch (e: Exception) {
                 if (isRTL) borderBottomLeftRadius else borderBottomRightRadius
             }
 
             val borderTopStartRadius = try {
-                val value = hole.getInt("borderTopStartRadius").dpToPx()
-                if (value == -1) borderRadius else value
+                val value = hole.getInt("borderTopStartRadius")
+                if (value == -1) borderRadius else value.dpToPx()
             } catch (e: Exception) {
                 if (isRTL) borderTopRightRadius else borderTopLeftRadius
             }
 
             val borderTopEndRadius = try {
-                val value = hole.getInt("borderTopEndRadius").dpToPx()
-                if (value == -1) borderRadius else value
+                val value = hole.getInt("borderTopEndRadius")
+                if (value == -1) borderRadius else value.dpToPx()
             } catch (e: Exception) {
                 if (isRTL) borderTopLeftRadius else borderTopRightRadius
             }
