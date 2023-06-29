@@ -11,7 +11,7 @@ import com.facebook.react.uimanager.events.RCTEventEmitter
 
 class RNHoleViewManager(private val reactContext: ReactApplicationContext): ViewGroupManager<RNHoleView>() {
 
-    val impl = RNHoleViewManagerImpl(reactContext)
+    private val impl = RNHoleViewManagerImpl(reactContext)
 
     override fun getName() = RNHoleViewManagerImpl.NAME
 
@@ -27,11 +27,10 @@ class RNHoleViewManager(private val reactContext: ReactApplicationContext): View
         return v
     }
 
-    override fun getExportedCustomBubblingEventTypeConstants(): MutableMap<String, Any> {
+    override fun getExportedCustomDirectEventTypeConstants(): MutableMap<String, Any> {
         return MapBuilder.builder<String, Any>()
                 .put(RNHoleViewManagerImpl.ON_ANIMATION_FINISHED, MapBuilder.of(
-                        "phasedRegistrationNames",
-                        MapBuilder.of<Any, Any>("bubbled", RNHoleViewManagerImpl.ON_ANIMATION_FINISHED)
+                        "registrationName", RNHoleViewManagerImpl.ON_ANIMATION_FINISHED
                     )
                 )
                 .build()

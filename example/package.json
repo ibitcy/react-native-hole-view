@@ -8,10 +8,12 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "preinstall": "rm -rf node_modules && cd ../ && yarn build",
-    "postinstall": "rm -rf node_modules/react-native-hole-view/node_modules"
+    "update_src": "sh refreshSrc.sh" ,
+    "preinstall": "sh refreshLib.sh" ,
+    "postinstall": "rm -rf node_modules/react-native-hole-view/node_modules && rm -rf node_modules/react-native-hole-view/example"
   },
   "dependencies": {
+    "@types/react-native-video": "^5.0.15",
     "react": "18.1.0",
     "react-native": "0.70.10",
     "react-native-hole-view": "../",

@@ -10,19 +10,12 @@
 
 import React, {useCallback, useEffect, useState} from 'react';
 import {
-    SafeAreaView,
-    StyleSheet,
     ScrollView,
     View,
-    Text,
-    StatusBar, TouchableOpacity,
+    Text, TouchableOpacity,
 } from 'react-native';
 
-import {
-    Colors,
-} from 'react-native/Libraries/NewAppScreen';
-
-import {RNHole, RNHoleView, ERNHoleViewTimingFunction, IRNHoleViewAnimation} from "react-native-hole-view";
+import {RNHole, RNHoleView, ERNHoleViewTimingFunction, IRNHoleViewAnimation} from "react-native-hole-view/src";
 
 import Video from 'react-native-video';
 
