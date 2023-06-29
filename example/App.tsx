@@ -80,7 +80,8 @@ const App = () => {
             >
                 <Video source={{uri: 'http://clips.vorwaerts-gmbh.de/VfE_html5.mp4'}}
                        resizeMode={"contain"}
-                       style={{flex: 1}}/>
+                       style={{flex: 1}}
+                />
             </RNHoleView>
             <View
                 pointerEvents={'box-none'}
