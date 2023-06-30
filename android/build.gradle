@@ -42,9 +42,9 @@ android {
     sourceSets {
         main {
             if (isNewArchitectureEnabled()) {
-                java.srcDirs += ['src/newarch']
+                java.srcDirs += ['src/newarch/']
             } else {
-                java.srcDirs += ['src/oldarch']
+                java.srcDirs += ['src/oldarch/']
             }
         }
     }

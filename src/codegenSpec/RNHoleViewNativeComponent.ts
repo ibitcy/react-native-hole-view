@@ -32,8 +32,8 @@ type HoleProp = {
 }
 
 export interface NativeProps extends ViewProps {
-    holes?: Array<HoleProp>;
-    animation?: AnimationProp;
+    holes?: ReadonlyArray<Readonly<HoleProp>>;
+    animation?: Readonly<AnimationProp>;
     onAnimationFinished?: BubblingEventHandler<AnimFinishEvent>;
 }
 
