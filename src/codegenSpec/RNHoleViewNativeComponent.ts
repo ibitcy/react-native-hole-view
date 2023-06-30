@@ -1,7 +1,7 @@
 import type {HostComponent,ViewProps} from 'react-native';
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
 import type {
-    BubblingEventHandler,
+    DirectEventHandler,
     WithDefault,
     Int32,
     Float,
@@ -34,7 +34,7 @@ type HoleProp = {
 export interface NativeProps extends ViewProps {
     holes?: ReadonlyArray<Readonly<HoleProp>>;
     animation?: Readonly<AnimationProp>;
-    onAnimationFinished?: BubblingEventHandler<AnimFinishEvent>;
+    onAnimationFinished?: DirectEventHandler<AnimFinishEvent>;
 }
 
 export default codegenNativeComponent<NativeProps>(
