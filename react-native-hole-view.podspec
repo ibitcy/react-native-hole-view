@@ -2,6 +2,8 @@ require 'json'
 
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
+folly_flags = '-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32'
+
 Pod::Spec.new do |s|
   s.name         = "react-native-hole-view"
   s.version      = package['version']
@@ -14,8 +16,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/ibitcy/react-native-hole-view", :tag => "master" }
   s.source_files = "ios/**/*.{h,m,mm}"
   s.requires_arc     = true
-#   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
-
   s.dependency 'React-Core'
 
   if ENV["RCT_NEW_ARCH_ENABLED"] == "1"
@@ -25,7 +25,6 @@ Pod::Spec.new do |s|
       "OTHER_CPLUSPLUSFLAGS" => "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1",
       "CLANG_CXX_LANGUAGE_STANDARD" => "c++17"
     }
-
     s.dependency "React-Codegen"
     s.dependency "React-RCTFabric"
     s.dependency "RCT-Folly"
