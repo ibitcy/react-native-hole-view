@@ -59,15 +59,26 @@ using namespace facebook::react;
     const auto &oldViewProps = *std::static_pointer_cast<RNHoleViewProps const>(_props);
     const auto &newViewProps = *std::static_pointer_cast<RNHoleViewProps const>(props);
 
-    NSMutableArray *holes = [[NSMutableArray alloc] init];
+	NSMutableArray *oldHoles = [[NSMutableArray alloc] init];
+	auto oldHolesIt = oldViewProps.holes.begin();
+	
+	while (oldHolesIt != oldViewProps.holes.end()) {
+		[oldHoles addObject: [self holeStructoDictionary: *oldHolesIt]];
+		oldHolesIt++;
+	}
+	
+    NSMutableArray *newHoles = [[NSMutableArray alloc] init];
     auto newHolesIt = newViewProps.holes.begin();
     
     while (newHolesIt != newViewProps.holes.end()) {
-        [holes addObject: [self holeStructoDictionary: *newHolesIt]];
+        [newHoles addObject: [self holeStructoDictionary: *newHolesIt]];
         newHolesIt++;
     }
-    [_view setHoles:holes];
-        
+	
+	if(![newHoles isEqualToArray:oldHoles]){
+		[_view setHoles:newHoles];
+	}
+	
     if (oldViewProps.animation.duration != newViewProps.animation.duration ||
         oldViewProps.animation.timingFunction != newViewProps.animation.timingFunction) {
         NSDictionary * animation = @{
