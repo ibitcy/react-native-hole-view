@@ -43,4 +43,6 @@ typedef void(^AnimationFinishedCallback)();
 
 @property (nonatomic, copy) AnimationFinishedCallback onAnimationFinishedFabric;
 
+- (void)setOnClick:(void (^)(void))onClickBlock;
+
 @end
