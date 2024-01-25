@@ -176,14 +176,14 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
         mHoles.addAll(holes)
     }
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         if (mHolesPath != null) {
             canvas?.drawPath(mHolesPath!!, mHolesPaint)
         }
     }
 
-    override fun dispatchDraw(canvas: Canvas?) {
+    override fun dispatchDraw(canvas: Canvas) {
         super.dispatchDraw(canvas)
         if (mHolesPath != null) {
             canvas?.drawPath(mHolesPath!!, mHolesPaint)
