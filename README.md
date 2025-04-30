@@ -2,6 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/react-native-hole-view.svg)](https://npmjs.com/package/react-native-hole-view)
 [![npm](https://img.shields.io/npm/dw/react-native-hole-view.svg)](https://npmjs.com/package/react-native-hole-view)
+[![Maintainers Wanted](https://img.shields.io/badge/maintainers-wanted-red.svg)](https://github.com/pickhardt/maintainers-wanted)
 
 ## Attention! Maintainers Wanted
 
