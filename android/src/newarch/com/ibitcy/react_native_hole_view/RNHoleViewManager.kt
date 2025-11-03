@@ -42,12 +42,15 @@ class RNHoleViewManager(val reactContext: ReactApplicationContext): ViewGroupMan
 
     override fun getExportedCustomBubblingEventTypeConstants(): MutableMap<String, Any> {
         return MapBuilder.builder<String, Any>()
-                .put("topAnimationFinished", MapBuilder.of(
-                        "phasedRegistrationNames",
-                        MapBuilder.of<Any, Any>("bubbled", RNHoleViewManagerImpl.ON_ANIMATION_FINISHED)
-                    )
+            .put(
+                "topAnimationFinished",
+                MapBuilder.of(
+                    "phasedRegistrationNames",
+                    MapBuilder.of<Any, Any>("bubbled", RNHoleViewManagerImpl.ON_ANIMATION_FINISHED)
                 )
-                .build()
+            )
+            .build()
+            .toMutableMap()
     }
 
     @ReactProp(name = "animation")
