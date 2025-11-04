@@ -32,7 +32,8 @@ import { RNHoleView } from 'react-native-hole-view';
     </Text>
   </ScrollView>
   <RNHoleView
-    style={{ position: 'absolute', width: '100%', height: '100%', backgroundColor: 'rgba(34,146,231,0.4)' }}
+    style={{ position: 'absolute', width: '100%', height: '100%' }}
+    overlayColor={'rgba(34,146,231,0.4)'}
     holes={[{ x: 150, y: 390, width: 120, height: 120, borderRadius: 60 }]}>
   </RNHoleView>
 </View>
@@ -63,7 +64,8 @@ import Video from 'react-native-video';
     </Text>
   </ScrollView>
   <RNHoleView
-    style={{ position: 'absolute', width: '100%', height: '100%', backgroundColor: 'rgba(34,146,231,0.4)' }}
+    style={{ position: 'absolute', width: '100%', height: '100%' }}
+    overlayColor={'rgba(34,146,231,0.4)'}
     holes={[{ x: 150, y: 390, width: 120, height: 120, borderRadius: 60 }]}>
     <Video source={{ uri: 'http://clips.vorwaerts-gmbh.de/VfE_html5.mp4' }} style={{ flex: 1 }} />
   </RNHoleView>

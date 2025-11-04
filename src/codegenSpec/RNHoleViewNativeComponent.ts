@@ -1,11 +1,8 @@
-import type {HostComponent,ViewProps} from 'react-native';
+import type {HostComponent,ViewProps, ColorValue} from 'react-native';
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
 import type {
     DirectEventHandler,
-    WithDefault,
     Int32,
-    Float,
-    Double,
 } from 'react-native/Libraries/Types/CodegenTypes';
 
 type AnimFinishEvent = Readonly<{}>;
@@ -33,6 +30,7 @@ type HoleProp = {
 
 export interface NativeProps extends ViewProps {
     holes?: ReadonlyArray<Readonly<HoleProp>>;
+    overlayColor?: ColorValue;
     animation?: Readonly<AnimationProp>;
     onAnimationFinished?: DirectEventHandler<AnimFinishEvent>;
 }
