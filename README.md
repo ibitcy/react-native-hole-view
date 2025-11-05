@@ -32,7 +32,8 @@ import { RNHoleView } from 'react-native-hole-view';
     </Text>
   </ScrollView>
   <RNHoleView
-    style={{ position: 'absolute', width: '100%', height: '100%', backgroundColor: 'rgba(34,146,231,0.4)' }}
+    style={{ position: 'absolute', width: '100%', height: '100%' }}
+    overlayColor={'rgba(34,146,231,0.4)'}
     holes={[{ x: 150, y: 390, width: 120, height: 120, borderRadius: 60 }]}>
   </RNHoleView>
 </View>
@@ -63,9 +64,13 @@ import Video from 'react-native-video';
     </Text>
   </ScrollView>
   <RNHoleView
-    style={{ position: 'absolute', width: '100%', height: '100%', backgroundColor: 'rgba(34,146,231,0.4)' }}
+    style={{ position: 'absolute', width: '100%', height: '100%' }}
+    overlayColor={'rgba(34,146,231,0.4)'}
     holes={[{ x: 150, y: 390, width: 120, height: 120, borderRadius: 60 }]}>
-    <Video source={{ uri: 'http://clips.vorwaerts-gmbh.de/VfE_html5.mp4' }} style={{ flex: 1 }} />
+    <Video
+      source={{ uri: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_30MB.mp4' }}
+      style={{ flex: 1 }}
+    />
   </RNHoleView>
 </View>
 ```
@@ -135,7 +140,7 @@ const App = () => {
                     setAnimation(undefined);
                 }}
             >
-                <Video source={{uri: 'http://clips.vorwaerts-gmbh.de/VfE_html5.mp4'}}
+                <Video source={{uri: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_30MB.mp4'}}
                        resizeMode={"contain"}
                        style={{flex: 1}}/>
             </RNHoleView>
