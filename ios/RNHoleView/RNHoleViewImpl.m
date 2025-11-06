@@ -65,9 +65,6 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 		_maskLayer.rasterizationScale = [UIScreen mainScreen].scale;
 		
 		self.layer.mask = _maskLayer;
-
-		_overlayColor = [[UIColor blackColor] colorWithAlphaComponent:0.7];
-		self.backgroundColor = _overlayColor;
 	}
 	return self;
 }
@@ -169,13 +166,6 @@ andBorderBottomRightRadius:(CGFloat)borderBottomRightRadius
 		}
 		
 	}
-}
-
-
--(void)setOverlayColor:(UIColor *)overlayColor
-{
-	_overlayColor = overlayColor;
-	self.backgroundColor = overlayColor;
 }
 
 

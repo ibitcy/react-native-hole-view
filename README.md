@@ -68,7 +68,7 @@ import Video from 'react-native-video';
     overlayColor={'rgba(34,146,231,0.4)'}
     holes={[{ x: 150, y: 390, width: 120, height: 120, borderRadius: 60 }]}>
     <Video
-      source={{ uri: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_30MB.mp4' }}
+      source={{ uri: 'https://cdn.vidyard.com/videos/uuAgWcoM5N4eFR4lUxoYKg/480p.mp4?gbzK5DIaQtu334rQMWVKBAGFBwZCVR6SHKgkwVYjsSLvOhADBtM4IZ_NxKjBze8TzK1o0XNrUd3UyZiiIdlaz_8icTZDM15OeUZ7DSsCBsQ' }}
       style={{ flex: 1 }}
     />
   </RNHoleView>
@@ -140,7 +140,7 @@ const App = () => {
                     setAnimation(undefined);
                 }}
             >
-                <Video source={{uri: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_30MB.mp4'}}
+                <Video source={{uri: 'https://cdn.vidyard.com/videos/uuAgWcoM5N4eFR4lUxoYKg/480p.mp4?gbzK5DIaQtu334rQMWVKBAGFBwZCVR6SHKgkwVYjsSLvOhADBtM4IZ_NxKjBze8TzK1o0XNrUd3UyZiiIdlaz_8icTZDM15OeUZ7DSsCBsQ'}}
                        resizeMode={"contain"}
                        style={{flex: 1}}/>
             </RNHoleView>

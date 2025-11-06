@@ -48,8 +48,6 @@ using namespace facebook::react;
         };
         
         self.contentView = _view;
-        
-        [_view setUserInteractionEnabled:true];
     }
      
     return self;
@@ -89,14 +87,10 @@ using namespace facebook::react;
         [_view setAnimation:animation];
     }
 
-	if (oldViewProps.overlayColor != newViewProps.overlayColor) {
-		UIColor *color = RCTUIColorFromSharedColor(newViewProps.overlayColor);
-		if (color) {
-			[_view setOverlayColor:color];
-		}
-	}
-
     [super updateProps:props oldProps:oldProps];
+
+    super.backgroundColor = [UIColor clearColor];
+    _view.backgroundColor = RCTUIColorFromSharedColor(newViewProps.backgroundColor);
 }
 
 - (void)onAnimationFinished

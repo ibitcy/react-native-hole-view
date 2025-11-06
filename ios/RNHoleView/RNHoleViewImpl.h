@@ -39,8 +39,6 @@ typedef void(^AnimationFinishedCallback)();
 
 @property (nonatomic) NSDictionary *animation;
 
-@property (nonatomic) UIColor *overlayColor;
-
 @property (nonatomic, copy) RCTDirectEventBlock onAnimationFinished;
 
 @property (nonatomic, copy) AnimationFinishedCallback onAnimationFinishedFabric;
