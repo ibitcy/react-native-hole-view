@@ -8,7 +8,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "update_src": "sh refreshSrc.sh" ,
+    "update_src": "sh refreshSrc.sh",
     "postinstall": "sh refreshLib.sh"
   },
   "dependencies": {
@@ -22,6 +22,7 @@
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@react-native/typescript-config": "0.82.1",
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^26.0.23",
     "@types/react": "^18.0.21",
