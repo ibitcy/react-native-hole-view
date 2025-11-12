@@ -9,10 +9,11 @@
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "update_src": "sh refreshSrc.sh",
-    "postinstall": "sh refreshLib.sh"
+    "postinstall": "sh refreshLib.sh && patch-package"
   },
   "dependencies": {
     "@types/react-native-video": "^5.0.15",
+    "patch-package": "^8.0.1",
     "react": "18.1.0",
     "react-native": "0.70.10",
     "react-native-hole-view": "../",
