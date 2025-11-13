@@ -1,4 +1,4 @@
-import { requireNativeComponent, ViewProps, ColorValue } from 'react-native';
+import { requireNativeComponent, ViewProps } from 'react-native';
 import * as React from 'react';
 
 const isFabricEnabled = global.nativeFabricUIManager != null;
@@ -41,7 +41,6 @@ export interface IRNHoleViewAnimation {
 
 export interface IRNHoleView extends ViewProps {
     holes?: RNHole[];
-    overlayColor?: ColorValue;
     animation?: IRNHoleViewAnimation;
     onAnimationFinished?: () => void;
 }

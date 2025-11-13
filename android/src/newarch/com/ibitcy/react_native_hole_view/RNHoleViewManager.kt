@@ -62,9 +62,4 @@ class RNHoleViewManager(val reactContext: ReactApplicationContext): ViewGroupMan
     override fun setHoles(view: RNHoleView, holesArg: ReadableArray?) {
         impl.setHoles(view,holesArg)
     }
-
-    @ReactProp(name = "overlayColor", customType = "Color")
-    override fun setOverlayColor(view: RNHoleView, color: Int?) {
-        impl.setOverlayColor(view, color)
-    }
 }

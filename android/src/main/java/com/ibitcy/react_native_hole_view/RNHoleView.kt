@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.*
 import android.view.animation.Interpolator
-import androidx.core.graphics.ColorUtils
 import com.facebook.react.bridge.ReactContext
 import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.uimanager.UIManagerModule
@@ -177,29 +176,18 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
         mHoles.addAll(holes)
     }
 
-    fun setOverlayColor(color: Int?) {
-        if (color != null) {
-            customBackgroundColor = color
-            invalidate()
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+        if (mHolesPath != null) {
+            canvas?.drawPath(mHolesPath!!, mHolesPaint)
         }
     }
 
-    private var customBackgroundColor: Int = ColorUtils.setAlphaComponent(
-        Color.parseColor("#000000"),
-        (0.7 * 255).toInt()
-    )
-
     override fun dispatchDraw(canvas: Canvas) {
-      if (mHolesPath != null) {
-          val layerId = canvas.saveLayer(
-              0F, 0F,
-              canvas.width.toFloat(), canvas.height.toFloat(), null, Canvas.ALL_SAVE_FLAG
-          )
-          canvas.drawColor(customBackgroundColor)
-          canvas.drawPath(mHolesPath!!, mHolesPaint)
-          canvas.restoreToCount(layerId);
-      }
-      super.dispatchDraw(canvas)
+        super.dispatchDraw(canvas)
+        if (mHolesPath != null) {
+            canvas?.drawPath(mHolesPath!!, mHolesPaint)
+        }
     }
 
     private fun isTouchInsideHole(touchX: Int, touchY: Int): Boolean {

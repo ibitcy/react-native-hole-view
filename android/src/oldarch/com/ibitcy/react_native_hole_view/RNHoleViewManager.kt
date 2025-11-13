@@ -45,9 +45,4 @@ class RNHoleViewManager(private val reactContext: ReactApplicationContext): View
     fun setHoles(view: RNHoleView, holesArg: ReadableArray?) {
         impl.setHoles(view, holesArg)
     }
-
-    @ReactProp(name = "overlayColor", customType = "Color")
-    fun setOverlayColor(view: RNHoleView, color: Int?) {
-        impl.setOverlayColor(view, color)
-    }
 }

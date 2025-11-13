@@ -144,10 +144,6 @@ class RNHoleViewManagerImpl(reactContext: ReactApplicationContext) {
         view.setHoles(holes)
     }
 
-    fun setOverlayColor(view: RNHoleView, color: Int?) {
-        view.setOverlayColor(color)
-    }
-
     private fun Int.dpToPx(): Int {
         val metrics = Resources.getSystem().displayMetrics
         val px = this * (metrics.densityDpi / 160f)
