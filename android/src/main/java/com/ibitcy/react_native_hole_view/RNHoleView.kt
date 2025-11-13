@@ -176,18 +176,15 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
         mHoles.addAll(holes)
     }
 
-    override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
+    override fun draw(canvas: Canvas) {
+        val saveCount = canvas.saveLayer(0f, 0f, width.toFloat(), height.toFloat(), null)
+        super.draw(canvas)
+        
         if (mHolesPath != null) {
-            canvas?.drawPath(mHolesPath!!, mHolesPaint)
+            canvas.drawPath(mHolesPath!!, mHolesPaint)
         }
-    }
-
-    override fun dispatchDraw(canvas: Canvas) {
-        super.dispatchDraw(canvas)
-        if (mHolesPath != null) {
-            canvas?.drawPath(mHolesPath!!, mHolesPaint)
-        }
+        
+        canvas.restoreToCount(saveCount)
     }
 
     private fun isTouchInsideHole(touchX: Int, touchY: Int): Boolean {
