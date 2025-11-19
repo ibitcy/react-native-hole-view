@@ -11,8 +11,9 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.73.8",
-    "react-native-web": "0.19.12",
-    "react-native-hole-view": "file:.."
+    "react-native-hole-view": "file:..",
+    "react-native-video": "^6.18.0",
+    "react-native-web": "0.19.12"
   },
   "devDependencies": {
     "@types/react": "18.2.47",
@@ -22,4 +23,3 @@
     "vite": "5.0.8"
   }
 }
-

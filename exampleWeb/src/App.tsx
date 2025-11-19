@@ -1,29 +1,29 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React, { useEffect, useState, useCallback } from "react";
+
 import {
-  SafeAreaView,
   View,
   Text,
-  StyleSheet,
-  TouchableOpacity,
+  ViewStyle,
   ScrollView,
-  useWindowDimensions,
-} from 'react-native';
+  TouchableOpacity,
+} from "react-native";
+
 import {
-  ERNHoleViewTimingFunction,
-  IRNHoleViewAnimation,
   RNHole,
   RNHoleView,
-} from 'react-native-hole-view';
+  IRNHoleViewAnimation,
+  ERNHoleViewTimingFunction,
+} from "react-native-hole-view";
 
 const firstHole: RNHole = {
-  x: 150,
-  y: 350,
+  x: 120,
+  y: 240,
   width: 120,
   height: 120,
   borderRadius: 60,
 };
 const secondHole: RNHole = {
-  x: 150,
+  x: 120,
   y: 40,
   width: 120,
   height: 120,
@@ -39,7 +39,7 @@ const App: React.FC = () => {
   const [holes, setHoles] = useState<RNHole[]>([]);
   const [animated, setAnimated] = useState<boolean>(false);
   const [animation, setAnimation] = useState<IRNHoleViewAnimation | undefined>(
-    undefined,
+    undefined
   );
 
   const onPress = useCallback(() => {
@@ -58,115 +58,105 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.root}>
-      <ScrollView contentContainerStyle={styles.scrollContent}>
-        <Text style={styles.title}>react-native-hole-view (web)</Text>
-        <Text style={styles.description}>
-          Click the button to move the highlight between cards. The overlay is rendered with the new web
-          implementation that mirrors the native behavior.
-        </Text>
-
-        <View style={styles.cards}>
-          {['Account', 'Deposit', 'Statistics'].map((label) => (
-            <View key={label} style={styles.card}>
-              <Text style={styles.cardTitle}>{label}</Text>
-              <Text style={styles.cardCopy}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Text>
-            </View>
-          ))}
-        </View>
-      </ScrollView>
+    <View
+      style={
+        {
+          backgroundColor: "white",
+          height: "100vh",
+          width: "100vw",
+        } as unknown as ViewStyle
+      }
+    >
+      <View
+        style={{
+          top: 250,
+        }}
+      >
+        <Text style={{ padding: 10 }}>{"Wow! I'm a text inside a hole!"}</Text>
+        <TouchableOpacity
+          onPress={() => {}}
+          style={{ backgroundColor: "pink", padding: 10, borderRadius: 5 }}
+        >
+          <Text>{"Wow! I'm a button inside a hole!"}</Text>
+        </TouchableOpacity>
+        <ScrollView style={{ padding: 10 }} horizontal={true}>
+          <Text style={{ color: "black" }} numberOfLines={1}>
+            {
+              "Wow! I'm a ScrollView inside a hole! Wow! I'm a ScrollView inside a hole! Wow! I'm a ScrollView inside a hole!"
+            }
+          </Text>
+        </ScrollView>
+      </View>
 
       <RNHoleView
         pointerEvents="box-none"
-        style={{
-                    position: 'absolute',
-          width: '100%',
-          height: '100%',
-          backgroundColor: 'rgba(34,146,231,0.4)',
-        }}
+        style={
+          {
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(34,146,231,0.4)",
+            height: "100vh",
+          } as unknown as ViewStyle
+        }
         holes={holes}
         animation={{
           timingFunction: ERNHoleViewTimingFunction.EASE_IN_OUT,
           duration: 220,
         }}
-        onAnimationFinished={() => {
-          // no-op, just demonstrating the prop
-        }}
       >
-        <View style={{
-          width: 400,
-          height: 400,
-          backgroundColor: 'blue',
-        }} />
+        <View pointerEvents="none" style={{ top: 200 }}>
+          <video
+            loop
+            muted
+            autoPlay
+            playsInline
+            disablePictureInPicture
+            disableRemotePlayback
+            controlsList="nofullscreen nodownload noremoteplayback noplaybackrate"
+            style={{
+              width: "100vw",
+            }}
+          >
+            <source
+              src={
+                "https://cdn.vidyard.com/videos/uuAgWcoM5N4eFR4lUxoYKg/480p.mp4?gbzK5DIaQtu334rQMWVKBAGFBwZCVR6SHKgkwVYjsSLvOhADBtM4IZ_NxKjBze8TzK1o0XNrUd3UyZiiIdlaz_8icTZDM15OeUZ7DSsCBsQ"
+              }
+              type="video/mp4"
+            />
+          </video>
+        </View>
       </RNHoleView>
-              <TouchableOpacity
+      <View
+        pointerEvents={"box-none"}
+        style={
+          {
+            position: "absolute",
+            flex: 1,
+            width: "100vw",
+            height: "100vh",
+            alignItems: "flex-end",
+            flexDirection: "row",
+            justifyContent: "center",
+          } as unknown as ViewStyle
+        }
+      >
+        <TouchableOpacity
           onPress={onPress}
           style={{
-            backgroundColor: 'pink',
+            backgroundColor: "pink",
             padding: 10,
             borderRadius: 5,
             bottom: 50,
           }}
         >
-          <Text>{'Animate!'}</Text>
+          <Text>{"Animate!"}</Text>
         </TouchableOpacity>
-    </SafeAreaView>
+      </View>
+    </View>
   );
 };
 
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    backgroundColor: '#080c16',
-  },
-  scrollContent: {
-    paddingHorizontal: 24,
-    paddingTop: 60,
-    paddingBottom: 120,
-    gap: 24,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: '600',
-    color: '#f5f5ff',
-  },
-  description: {
-    fontSize: 16,
-    color: '#d2d6f4',
-    lineHeight: 22,
-  },
-  cards: {
-    gap: 20,
-  },
-  card: {
-    backgroundColor: '#121a2c',
-    padding: 20,
-    borderRadius: 18,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: '#1f2940',
-  },
-  cardTitle: {
-    fontSize: 20,
-    color: '#fefefe',
-    marginBottom: 6,
-    fontWeight: '600',
-  },
-  cardCopy: {
-    color: '#aeb4d8',
-  },
-  button: {
-    alignSelf: 'flex-start',
-    backgroundColor: '#4f7cff',
-    paddingHorizontal: 20,
-    paddingVertical: 12,
-    borderRadius: 999,
-  },
-  buttonLabel: {
-    color: '#fff',
-    fontWeight: '600',
-    fontSize: 15,
-  },
-});
-
 export default App;
-

@@ -22,6 +22,18 @@ type LayoutSize = {
     height: number;
 };
 
+type MaskableViewStyle = ViewStyle & {
+    mask?: string;
+    WebkitMask?: string;
+    maskImage?: string;
+    WebkitMaskImage?: string;
+    maskRepeat?: string;
+    WebkitMaskRepeat?: string;
+    maskSize?: string;
+    WebkitMaskSize?: string;
+    maskMode?: string;
+};
+
 type CornerRadii = {
     topLeft: number;
     topRight: number;
@@ -183,6 +195,31 @@ export const RNHoleViewWeb = (props: IRNHoleView) => {
         return `${outer} ${holesPath}`;
     }, [layout, holesProp]);
 
+    const maskImage = React.useMemo(() => {
+        if (!pathD || !layout.width || !layout.height) {
+            return undefined;
+        }
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${layout.width}" height="${layout.height}" viewBox="0 0 ${layout.width} ${layout.height}"><path d="${pathD}" fill="white" fill-rule="evenodd"/></svg>`;
+
+        return `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`;
+    }, [pathD, layout]);
+
+    const maskStyle = React.useMemo<MaskableViewStyle | undefined>(() => {
+        if (!maskImage) {
+            return undefined;
+        }
+
+        return {
+            maskImage,
+            maskRepeat: 'no-repeat',
+            maskSize: '100% 100%',
+            maskMode: 'alpha',
+            WebkitMaskImage: maskImage,
+            WebkitMaskRepeat: 'no-repeat',
+            WebkitMaskSize: '100% 100%',
+        };
+    }, [maskImage]);
+
     React.useEffect(() => {
         if (!animationProp || !onAnimationFinished) {
             return;
@@ -198,10 +235,9 @@ export const RNHoleViewWeb = (props: IRNHoleView) => {
     return (
         <View
             {...rest}
-            style={containerStyle}
+            style={maskStyle ? [containerStyle, maskStyle] : containerStyle}
             onLayout={handleLayout}
         >
-            {children}
             {pathD ? (
                 <svg
                     width="100%"
@@ -221,6 +257,9 @@ export const RNHoleViewWeb = (props: IRNHoleView) => {
                     />
                 </svg>
             ) : null}
+            <View pointerEvents="box-none" style={styles.childrenContainer}>
+                {children}
+            </View>
         </View>
     );
 };
@@ -236,6 +275,10 @@ const styles = StyleSheet.create({
         right: 0,
         bottom: 0,
         pointerEvents: 'none',
+        zIndex: 0,
+    },
+    childrenContainer: {
+        zIndex: 1,
     },
 });
 
