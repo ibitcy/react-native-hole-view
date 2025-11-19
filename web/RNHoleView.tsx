@@ -15,7 +15,8 @@ import {
     sanitizeHolesProp,
     SanitizedHole,
 } from '../src/RNHoleView.types';
-import type { IRNHoleView } from '../src/RNHoleView.types';
+
+import type { IRNHoleView, SanitizedAnimation } from '../src/RNHoleView.types';
 
 type LayoutSize = {
     width: number;
@@ -42,6 +43,82 @@ type CornerRadii = {
 };
 
 const DEFAULT_OVERLAY_COLOR = 'rgba(0, 0, 0, 0.6)';
+const HOLE_NUMERIC_KEYS: Array<Exclude<keyof SanitizedHole, 'isRTL'>> = [
+    'height',
+    'width',
+    'x',
+    'y',
+    'borderRadius',
+    'borderTopLeftRadius',
+    'borderTopRightRadius',
+    'borderBottomLeftRadius',
+    'borderBottomRightRadius',
+    'borderTopStartRadius',
+    'borderTopEndRadius',
+    'borderBottomStartRadius',
+    'borderBottomEndRadius',
+];
+const lerp = (start: number, end: number, progress: number): number => {
+    if (progress <= 0) {
+        return start;
+    }
+    if (progress >= 1) {
+        return end;
+    }
+    return start + (end - start) * progress;
+};
+
+const getEasedProgress = (timingFunction: SanitizedAnimation['timingFunction'], progress: number): number => {
+    const clamped = Math.min(Math.max(progress, 0), 1);
+    switch (timingFunction) {
+        case 'EASE_IN':
+            return clamped * clamped;
+        case 'EASE_OUT':
+            return 1 - (1 - clamped) * (1 - clamped);
+        case 'EASE_IN_OUT':
+            return clamped < 0.5
+                ? 2 * clamped * clamped
+                : 1 - Math.pow(-2 * clamped + 2, 2) / 2;
+        case 'LINEAR':
+        default:
+            return clamped;
+    }
+};
+
+const interpolateHole = (fromHole: SanitizedHole, toHole: SanitizedHole, progress: number): SanitizedHole => {
+    const easedProgress = Math.min(Math.max(progress, 0), 1);
+    const result: SanitizedHole = { ...toHole };
+
+    HOLE_NUMERIC_KEYS.forEach((key) => {
+        result[key] = lerp(fromHole[key], toHole[key], easedProgress);
+    });
+
+    return result;
+};
+
+const holesAreEqual = (first: SanitizedHole[], second: SanitizedHole[]): boolean => {
+    if (first.length !== second.length) {
+        return false;
+    }
+
+    for (let i = 0; i < first.length; i += 1) {
+        const a = first[i];
+        const b = second[i];
+        if (!a || !b) {
+            return false;
+        }
+        if (a.isRTL !== b.isRTL) {
+            return false;
+        }
+        for (const key of HOLE_NUMERIC_KEYS) {
+            if (a[key] !== b[key]) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+};
 
 const clampRadius = (radius: number, width: number, height: number): number => {
     return Math.max(0, Math.min(radius, width / 2, height / 2));
@@ -138,6 +215,14 @@ declare global {
     }
 }
 
+const useStableId = (): string => {
+    const idRef = React.useRef<string | null>(null);
+    if (idRef.current === null) {
+        idRef.current = `rnhw-mask-${Math.random().toString(36).slice(2, 10)}`;
+    }
+    return idRef.current;
+};
+
 export const RNHoleViewWeb = (props: IRNHoleView) => {
     const {
         animation,
@@ -153,6 +238,98 @@ export const RNHoleViewWeb = (props: IRNHoleView) => {
     const holesProp = React.useMemo(() => sanitizeHolesProp(holes), [holes]);
 
     const [layout, setLayout] = React.useState<LayoutSize>({ width: 0, height: 0 });
+    const [animatedHoles, setAnimatedHoles] = React.useState<SanitizedHole[]>(holesProp);
+
+    const lastTargetHolesRef = React.useRef<SanitizedHole[]>(holesProp);
+    const renderedHolesRef = React.useRef<SanitizedHole[]>(holesProp);
+    const animationFrameRef = React.useRef<number | null>(null);
+    const animationStartRef = React.useRef<number | null>(null);
+    const finishCallbackRef = React.useRef<(() => void) | undefined>(onAnimationFinished);
+
+    const cancelAnimation = React.useCallback(() => {
+        if (animationFrameRef.current !== null) {
+            cancelAnimationFrame(animationFrameRef.current);
+            animationFrameRef.current = null;
+        }
+        animationStartRef.current = null;
+    }, []);
+
+    React.useEffect(() => {
+        finishCallbackRef.current = onAnimationFinished;
+    }, [onAnimationFinished]);
+
+    React.useEffect(() => {
+        renderedHolesRef.current = animatedHoles;
+    }, [animatedHoles]);
+
+    React.useEffect(() => {
+        return () => {
+            cancelAnimation();
+        };
+    }, [cancelAnimation]);
+
+    React.useEffect(() => {
+        const prevTargetHoles = lastTargetHolesRef.current;
+        const startHolesSnapshot = renderedHolesRef.current;
+
+        const runImmediateUpdate = () => {
+            cancelAnimation();
+            setAnimatedHoles(holesProp);
+            renderedHolesRef.current = holesProp;
+            lastTargetHolesRef.current = holesProp;
+        };
+
+        if (
+            !animationProp ||
+            !startHolesSnapshot.length ||
+            !holesProp.length ||
+            holesAreEqual(prevTargetHoles, holesProp)
+        ) {
+            runImmediateUpdate();
+            return;
+        }
+
+        const duration = animationProp.duration ?? DEFAULT_DURATION;
+
+        cancelAnimation();
+
+        const frame = (timestamp: number) => {
+            if (animationStartRef.current === null) {
+                animationStartRef.current = timestamp;
+            }
+
+            const elapsed = timestamp - animationStartRef.current;
+            const progress = Math.min(Math.max(elapsed / duration, 0), 1);
+            const easedProgress = getEasedProgress(animationProp.timingFunction, progress);
+
+            const nextHoles = holesProp.map((targetHole, index) => {
+                const fromHole = startHolesSnapshot[index] ?? targetHole;
+                if (progress === 1) {
+                    return targetHole;
+                }
+                return interpolateHole(fromHole, targetHole, easedProgress);
+            });
+
+            setAnimatedHoles(nextHoles);
+
+            if (progress >= 1) {
+                cancelAnimation();
+                setAnimatedHoles(holesProp);
+                renderedHolesRef.current = holesProp;
+                lastTargetHolesRef.current = holesProp;
+                finishCallbackRef.current?.();
+                return;
+            }
+
+            animationFrameRef.current = requestAnimationFrame(frame);
+        };
+
+        animationFrameRef.current = requestAnimationFrame(frame);
+
+        return () => {
+            cancelAnimation();
+        };
+    }, [animationProp, cancelAnimation, holesProp]);
 
     const flattenedStyle = React.useMemo<ViewStyle | undefined>(
         () => StyleSheet.flatten(style) as ViewStyle | undefined,
@@ -172,6 +349,8 @@ export const RNHoleViewWeb = (props: IRNHoleView) => {
         [flattenedStyle],
     );
 
+    const maskId = useStableId();
+
     const handleLayout = React.useCallback((event: LayoutChangeEvent) => {
         const { width, height } = event.nativeEvent.layout;
         setLayout({ width, height });
@@ -184,53 +363,61 @@ export const RNHoleViewWeb = (props: IRNHoleView) => {
         }
 
         const outer = `M0 0 H${layout.width} V${layout.height} H0 Z`;
-        if (!holesProp.length) {
+        if (!animatedHoles.length) {
             return outer;
         }
 
-        const holesPath = holesProp
+        const holesPath = animatedHoles
             .map((hole) => roundedRectPath(hole))
             .join(' ');
 
         return `${outer} ${holesPath}`;
-    }, [layout, holesProp]);
-
-    const maskImage = React.useMemo(() => {
-        if (!pathD || !layout.width || !layout.height) {
-            return undefined;
-        }
-        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${layout.width}" height="${layout.height}" viewBox="0 0 ${layout.width} ${layout.height}"><path d="${pathD}" fill="white" fill-rule="evenodd"/></svg>`;
-
-        return `url('data:image/svg+xml;utf8,${encodeURIComponent(svg)}')`;
-    }, [pathD, layout]);
+    }, [layout, animatedHoles]);
 
     const maskStyle = React.useMemo<MaskableViewStyle | undefined>(() => {
-        if (!maskImage) {
+        if (!pathD) {
             return undefined;
         }
 
         return {
-            maskImage,
+            mask: `url(#${maskId})`,
+            WebkitMask: `url(#${maskId})`,
             maskRepeat: 'no-repeat',
             maskSize: '100% 100%',
             maskMode: 'alpha',
-            WebkitMaskImage: maskImage,
             WebkitMaskRepeat: 'no-repeat',
             WebkitMaskSize: '100% 100%',
         };
-    }, [maskImage]);
+    }, [maskId, pathD]);
 
-    React.useEffect(() => {
-        if (!animationProp || !onAnimationFinished) {
-            return;
+    const maskDefinition = React.useMemo(() => {
+        if (!pathD || !layout.width || !layout.height) {
+            return null;
         }
 
-        const timer = setTimeout(() => {
-            onAnimationFinished();
-        }, animationProp.duration ?? DEFAULT_DURATION);
-
-        return () => clearTimeout(timer);
-    }, [animationProp, onAnimationFinished]);
+        return (
+            <svg
+                aria-hidden="true"
+                width={0}
+                height={0}
+                style={{ position: 'absolute' }}
+            >
+                <defs>
+                    <mask
+                        id={maskId}
+                        maskUnits="userSpaceOnUse"
+                        maskContentUnits="userSpaceOnUse"
+                        x={0}
+                        y={0}
+                        width={layout.width}
+                        height={layout.height}
+                    >
+                        <path d={pathD} fill="white" fillRule="evenodd" />
+                    </mask>
+                </defs>
+            </svg>
+        );
+    }, [layout.height, layout.width, maskId, pathD]);
 
     return (
         <View
@@ -238,6 +425,7 @@ export const RNHoleViewWeb = (props: IRNHoleView) => {
             style={maskStyle ? [containerStyle, maskStyle] : containerStyle}
             onLayout={handleLayout}
         >
+            {maskDefinition}
             {pathD ? (
                 <svg
                     width="100%"
