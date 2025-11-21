@@ -2,10 +2,7 @@ import type {HostComponent,ViewProps} from 'react-native';
 import codegenNativeComponent from 'react-native/Libraries/Utilities/codegenNativeComponent';
 import type {
     DirectEventHandler,
-    WithDefault,
     Int32,
-    Float,
-    Double,
 } from 'react-native/Libraries/Types/CodegenTypes';
 
 type AnimFinishEvent = Readonly<{}>;

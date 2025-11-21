@@ -65,7 +65,10 @@ import Video from 'react-native-video';
   <RNHoleView
     style={{ position: 'absolute', width: '100%', height: '100%', backgroundColor: 'rgba(34,146,231,0.4)' }}
     holes={[{ x: 150, y: 390, width: 120, height: 120, borderRadius: 60 }]}>
-    <Video source={{ uri: 'http://clips.vorwaerts-gmbh.de/VfE_html5.mp4' }} style={{ flex: 1 }} />
+    <Video
+      source={{ uri: 'https://cdn.vidyard.com/videos/uuAgWcoM5N4eFR4lUxoYKg/480p.mp4?gbzK5DIaQtu334rQMWVKBAGFBwZCVR6SHKgkwVYjsSLvOhADBtM4IZ_NxKjBze8TzK1o0XNrUd3UyZiiIdlaz_8icTZDM15OeUZ7DSsCBsQ' }}
+      style={{ flex: 1 }}
+    />
   </RNHoleView>
 </View>
 ```
@@ -135,7 +138,7 @@ const App = () => {
                     setAnimation(undefined);
                 }}
             >
-                <Video source={{uri: 'http://clips.vorwaerts-gmbh.de/VfE_html5.mp4'}}
+                <Video source={{uri: 'https://cdn.vidyard.com/videos/uuAgWcoM5N4eFR4lUxoYKg/480p.mp4?gbzK5DIaQtu334rQMWVKBAGFBwZCVR6SHKgkwVYjsSLvOhADBtM4IZ_NxKjBze8TzK1o0XNrUd3UyZiiIdlaz_8icTZDM15OeUZ7DSsCBsQ'}}
                        resizeMode={"contain"}
                        style={{flex: 1}}/>
             </RNHoleView>
