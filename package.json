@@ -57,6 +57,13 @@
   "codegenConfig": {
     "name": "RNHoleView",
     "type": "components",
-    "jsSrcsDir": "./src/codegenSpec"
+    "jsSrcsDir": "./src/codegenSpec",
+    "ios": {
+      "components": {
+        "RNHoleView": {
+          "className": "RNHoleView"
+        }
+      }
+    }
   }
 }

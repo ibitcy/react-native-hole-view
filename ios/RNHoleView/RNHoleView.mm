@@ -17,6 +17,7 @@
 #import <react/renderer/components/RNHoleView/RCTComponentViewHelpers.h>
 
 #import "RCTFabricComponentsPlugins.h"
+#import <React/RCTConversions.h>
 
 using namespace facebook::react;
 
@@ -47,8 +48,6 @@ using namespace facebook::react;
         };
         
         self.contentView = _view;
-        
-        [self setUserInteractionEnabled:false]; // important to allow touch through holes
     }
      
     return self;
@@ -89,6 +88,9 @@ using namespace facebook::react;
     }
 
     [super updateProps:props oldProps:oldProps];
+
+    super.backgroundColor = [UIColor clearColor];
+    _view.backgroundColor = RCTUIColorFromSharedColor(newViewProps.backgroundColor);
 }
 
 - (void)onAnimationFinished
@@ -110,6 +112,11 @@ using namespace facebook::react;
 - (void)unmountChildComponentView:(UIView<RCTComponentViewProtocol> *)childComponentView index:(NSInteger)index
 {
     [_view unmountChildComponentView:childComponentView index:index];
+}
+
+- (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
+{
+    return [_view pointInside:point withEvent:event];
 }
 
 - holeStructoDictionary:(facebook::react::RNHoleViewHolesStruct) holeStruct
