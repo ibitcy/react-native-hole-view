@@ -244,48 +244,73 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
 //    }
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-        super.onInterceptTouchEvent(ev)
-        return isTouchInsideHole(ev.x.toInt(), ev.y.toInt())
+        val inside = isTouchInsideHole(ev.x.toInt(), ev.y.toInt())
+
+        if (inside) {
+            return false
+        }
+
+        return super.onInterceptTouchEvent(ev)
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         val inside = isTouchInsideHole(ev.x.toInt(), ev.y.toInt())
+
         if (inside) {
-            passTouchEventToViewAndChildren(getRoot(), ev)
+            return passThoughToViewsUnder(ev)
         }
-        return !inside
+
+        return super.dispatchTouchEvent(ev)
     }
 
-    private fun getRoot(): ViewGroup {
-        return parent as ViewGroup
-    }
+    private fun passThoughToViewsUnder(ev: MotionEvent): Boolean {
+        val parent = parent as ViewGroup
+        val childrenCount = parent.childCount
+        var handled = false
 
-    private fun passTouchEventToViewAndChildren(v: ViewGroup, ev: MotionEvent) {
-        val childrenCount = v.childCount
-        for (i in 0 until childrenCount) {
-            val child = v.getChildAt(i)
-            if (child.id > 0 && isViewInsideTouch(ev, child) && child.visibility == View.VISIBLE) {
+        for (i in childrenCount - 1 downTo 0) {
+            val child = parent.getChildAt(i)
+
+            if (child === this) {
+                continue
+            }
+
+            if (child.visibility == View.VISIBLE && child.id > 0 && isViewInsideTouch(ev, child)) {
                 try {
-                    val mmEventDispatcher = UIManagerHelper.getEventDispatcherForReactTag((context as ReactContext), child.id) ;
-                    mmEventDispatcher!!.dispatchEvent(
-                            TouchEvent.obtain(
-                                    UIManagerHelper.getSurfaceId(child),
-                                    child.id,
-                                    TouchEventType.START,
-                                    ev,
-                                    ev.eventTime,
-                                    ev.x,
-                                    ev.y,
-                                    TouchEventCoalescingKeyHelper()
-                            )
+                    val touchEventType = when (ev.actionMasked) {
+                        MotionEvent.ACTION_DOWN -> TouchEventType.START
+                        MotionEvent.ACTION_UP -> TouchEventType.END
+                        MotionEvent.ACTION_MOVE -> TouchEventType.MOVE
+                        MotionEvent.ACTION_CANCEL -> TouchEventType.CANCEL
+                        else -> TouchEventType.START
+                    }
+
+                    val eventDispatcher = UIManagerHelper.getEventDispatcherForReactTag(
+                        (context as ReactContext),
+                        child.id
+                    )
+                    eventDispatcher?.dispatchEvent(
+                        TouchEvent.obtain(
+                            UIManagerHelper.getSurfaceId(child),
+                            child.id,
+                            touchEventType,
+                            ev,
+                            ev.eventTime,
+                            ev.x,
+                            ev.y,
+                            TouchEventCoalescingKeyHelper()
+                        )
                     )
                 } catch (e: Exception) {
                 }
-                if (child is ViewGroup && child.childCount > 0) {
-                    passTouchEventToViewAndChildren(child, ev)
+
+                if (child.dispatchTouchEvent(ev)) {
+                    handled = true
                 }
             }
         }
+
+        return handled
     }
 
     private fun isViewInsideTouch(event: MotionEvent, view: View): Boolean {
