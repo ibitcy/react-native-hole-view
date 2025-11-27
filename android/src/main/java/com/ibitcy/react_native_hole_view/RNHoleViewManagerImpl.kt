@@ -44,6 +44,7 @@ class RNHoleViewManagerImpl(reactContext: ReactApplicationContext) {
 
     public fun setHoles(view: RNHoleView, holesArg: ReadableArray?) {
         if (holesArg == null || holesArg.size() == 0) {
+            view.clearHoles()
             return
         }
 

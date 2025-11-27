@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator
 import android.animation.RectEvaluator
 import android.content.Context
 import android.graphics.*
+import android.os.Build
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -65,19 +66,19 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
     var onAnimationFinished: (() -> Unit)? = null
 
     private var mHolesPath: Path? = null
-    private val mHolesPaint: Paint
 
     init {
         this.setLayerType(View.LAYER_TYPE_HARDWARE, null)
-
-        mHolesPaint = Paint()
-        mHolesPaint.color = Color.TRANSPARENT
-        mHolesPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
     }
 
     private val mHoles = ArrayList<Hole>()
 
     fun setHoles(holes: List<Hole>) {
+        if (holes.isEmpty()) {
+            clearHoles()
+            return
+        }
+
         mHolesPath = Path()
 
         val animatorList = arrayListOf<Animator>()
@@ -176,17 +177,39 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
         mHoles.addAll(holes)
     }
 
-    override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
-        if (mHolesPath != null) {
-            canvas?.drawPath(mHolesPath!!, mHolesPaint)
+    fun clearHoles() {
+        if (mHolesPath == null && mHoles.isEmpty()) {
+            return
         }
+        mHolesPath = null
+        mHoles.clear()
+        postInvalidateOnAnimation()
     }
 
-    override fun dispatchDraw(canvas: Canvas) {
-        super.dispatchDraw(canvas)
-        if (mHolesPath != null) {
-            canvas?.drawPath(mHolesPath!!, mHolesPaint)
+    override fun draw(canvas: Canvas) {
+        if (!hasActiveHoles()) {
+            super.draw(canvas)
+            return
+        }
+
+        val checkpoint = canvas.save()
+        clipOutHoles(canvas)
+        super.draw(canvas)
+        canvas.restoreToCount(checkpoint)
+    }
+
+    private fun hasActiveHoles(): Boolean {
+        val path = mHolesPath
+        return path != null && !path.isEmpty
+    }
+
+    private fun clipOutHoles(canvas: Canvas) {
+        val holesPath = mHolesPath ?: return
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            canvas.clipOutPath(holesPath)
+        } else {
+            @Suppress("DEPRECATION")
+            canvas.clipPath(holesPath, Region.Op.DIFFERENCE)
         }
     }
 
