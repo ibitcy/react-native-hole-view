@@ -90,6 +90,7 @@ const App = () => {
           source={{
             uri: 'https://cdn.vidyard.com/videos/uuAgWcoM5N4eFR4lUxoYKg/480p.mp4?gbzK5DIaQtu334rQMWVKBAGFBwZCVR6SHKgkwVYjsSLvOhADBtM4IZ_NxKjBze8TzK1o0XNrUd3UyZiiIdlaz_8icTZDM15OeUZ7DSsCBsQ',
           }}
+          repeat={true}
           resizeMode={'contain'}
           style={{ flex: 1 }}
         />
