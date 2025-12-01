@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator
 import android.animation.RectEvaluator
 import android.content.Context
 import android.graphics.*
+import android.os.Build
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
@@ -65,19 +66,19 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
     var onAnimationFinished: (() -> Unit)? = null
 
     private var mHolesPath: Path? = null
-    private val mHolesPaint: Paint
 
     init {
         this.setLayerType(View.LAYER_TYPE_HARDWARE, null)
-
-        mHolesPaint = Paint()
-        mHolesPaint.color = Color.TRANSPARENT
-        mHolesPaint.xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
     }
 
     private val mHoles = ArrayList<Hole>()
 
     fun setHoles(holes: List<Hole>) {
+        if (holes.isEmpty()) {
+            clearHoles()
+            return
+        }
+
         mHolesPath = Path()
 
         val animatorList = arrayListOf<Animator>()
@@ -176,17 +177,39 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
         mHoles.addAll(holes)
     }
 
-    override fun onDraw(canvas: Canvas) {
-        super.onDraw(canvas)
-        if (mHolesPath != null) {
-            canvas?.drawPath(mHolesPath!!, mHolesPaint)
+    fun clearHoles() {
+        if (mHolesPath == null && mHoles.isEmpty()) {
+            return
         }
+        mHolesPath = null
+        mHoles.clear()
+        postInvalidateOnAnimation()
     }
 
-    override fun dispatchDraw(canvas: Canvas) {
-        super.dispatchDraw(canvas)
-        if (mHolesPath != null) {
-            canvas?.drawPath(mHolesPath!!, mHolesPaint)
+    override fun draw(canvas: Canvas) {
+        if (!hasActiveHoles()) {
+            super.draw(canvas)
+            return
+        }
+
+        val checkpoint = canvas.save()
+        clipOutHoles(canvas)
+        super.draw(canvas)
+        canvas.restoreToCount(checkpoint)
+    }
+
+    private fun hasActiveHoles(): Boolean {
+        val path = mHolesPath
+        return path != null && !path.isEmpty
+    }
+
+    private fun clipOutHoles(canvas: Canvas) {
+        val holesPath = mHolesPath ?: return
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            canvas.clipOutPath(holesPath)
+        } else {
+            @Suppress("DEPRECATION")
+            canvas.clipPath(holesPath, Region.Op.DIFFERENCE)
         }
     }
 
@@ -221,48 +244,73 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
 //    }
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
-        super.onInterceptTouchEvent(ev)
-        return isTouchInsideHole(ev.x.toInt(), ev.y.toInt())
+        val inside = isTouchInsideHole(ev.x.toInt(), ev.y.toInt())
+
+        if (inside) {
+            return false
+        }
+
+        return super.onInterceptTouchEvent(ev)
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         val inside = isTouchInsideHole(ev.x.toInt(), ev.y.toInt())
+
         if (inside) {
-            passTouchEventToViewAndChildren(getRoot(), ev)
+            return passThoughToViewsUnder(ev)
         }
-        return !inside
+
+        return super.dispatchTouchEvent(ev)
     }
 
-    private fun getRoot(): ViewGroup {
-        return parent as ViewGroup
-    }
+    private fun passThoughToViewsUnder(ev: MotionEvent): Boolean {
+        val parent = parent as ViewGroup
+        val childrenCount = parent.childCount
+        var handled = false
 
-    private fun passTouchEventToViewAndChildren(v: ViewGroup, ev: MotionEvent) {
-        val childrenCount = v.childCount
-        for (i in 0 until childrenCount) {
-            val child = v.getChildAt(i)
-            if (child.id > 0 && isViewInsideTouch(ev, child) && child.visibility == View.VISIBLE) {
+        for (i in childrenCount - 1 downTo 0) {
+            val child = parent.getChildAt(i)
+
+            if (child === this) {
+                continue
+            }
+
+            if (child.visibility == View.VISIBLE && child.id > 0 && isViewInsideTouch(ev, child)) {
                 try {
-                    val mmEventDispatcher = UIManagerHelper.getEventDispatcherForReactTag((context as ReactContext), child.id) ;
-                    mmEventDispatcher!!.dispatchEvent(
-                            TouchEvent.obtain(
-                                    UIManagerHelper.getSurfaceId(child),
-                                    child.id,
-                                    TouchEventType.START,
-                                    ev,
-                                    ev.eventTime,
-                                    ev.x,
-                                    ev.y,
-                                    TouchEventCoalescingKeyHelper()
-                            )
+                    val touchEventType = when (ev.actionMasked) {
+                        MotionEvent.ACTION_DOWN -> TouchEventType.START
+                        MotionEvent.ACTION_UP -> TouchEventType.END
+                        MotionEvent.ACTION_MOVE -> TouchEventType.MOVE
+                        MotionEvent.ACTION_CANCEL -> TouchEventType.CANCEL
+                        else -> TouchEventType.START
+                    }
+
+                    val eventDispatcher = UIManagerHelper.getEventDispatcherForReactTag(
+                        (context as ReactContext),
+                        child.id
+                    )
+                    eventDispatcher?.dispatchEvent(
+                        TouchEvent.obtain(
+                            UIManagerHelper.getSurfaceId(child),
+                            child.id,
+                            touchEventType,
+                            ev,
+                            ev.eventTime,
+                            ev.x,
+                            ev.y,
+                            TouchEventCoalescingKeyHelper()
+                        )
                     )
                 } catch (e: Exception) {
                 }
-                if (child is ViewGroup && child.childCount > 0) {
-                    passTouchEventToViewAndChildren(child, ev)
+
+                if (child.dispatchTouchEvent(ev)) {
+                    handled = true
                 }
             }
         }
+
+        return handled
     }
 
     private fun isViewInsideTouch(event: MotionEvent, view: View): Boolean {
