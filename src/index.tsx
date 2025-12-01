@@ -6,7 +6,9 @@ import {
 } from './RNHoleView.types';
 import type { IRNHoleView } from './RNHoleView.types';
 
-const isFabricEnabled = global.nativeFabricUIManager != null;
+const isFabricEnabled = (global as {
+  nativeFabricUIManager?: unknown | null;
+}).nativeFabricUIManager != null;
 
 const RNHoleViewManager = isFabricEnabled ?
      require("./codegenSpec/RNHoleViewNativeComponent").default :
