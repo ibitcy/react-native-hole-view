@@ -422,6 +422,7 @@ export const RNHoleViewWeb = (props: IRNHoleView) => {
     return (
         <View
             {...rest}
+            pointerEvents="box-none"
             style={maskStyle ? [containerStyle, maskStyle] : containerStyle}
             onLayout={handleLayout}
         >
@@ -445,7 +446,7 @@ export const RNHoleViewWeb = (props: IRNHoleView) => {
                     />
                 </svg>
             ) : null}
-            <View pointerEvents="box-none" style={styles.childrenContainer}>
+            <View pointerEvents="none" style={styles.childrenContainer}>
                 {children}
             </View>
         </View>

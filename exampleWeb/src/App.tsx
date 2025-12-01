@@ -89,7 +89,6 @@ const App: React.FC = () => {
       </View>
 
       <RNHoleView
-        pointerEvents="box-none"
         style={
           {
             position: "absolute",
@@ -107,7 +106,7 @@ const App: React.FC = () => {
           duration: 220,
         }}
       >
-        <View pointerEvents="none" style={{ top: 200 }}>
+        <View style={{ top: 200 }}>
           <video
             loop
             muted
