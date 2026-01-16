@@ -16,6 +16,7 @@
     "android",
     "ios",
     "src",
+    "web",
     "dist",
     "react-native-hole-view.podspec"
   ],
