@@ -22,6 +22,8 @@ import android.view.animation.LinearInterpolator
 import androidx.core.graphics.withSave
 import androidx.core.view.isVisible
 import com.facebook.react.bridge.ReactContext
+import com.facebook.react.uimanager.PointerEvents
+import com.facebook.react.uimanager.ReactPointerEventsView
 import com.facebook.react.uimanager.TouchTargetHelper
 import com.facebook.react.uimanager.UIManagerHelper
 import com.facebook.react.uimanager.events.TouchEvent
@@ -240,7 +242,8 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
         val clickableRegion = Region()
         val rectF = RectF()
         mHolesPath!!.computeBounds(rectF, true)
-        val rect = Rect(rectF.left.toInt(), rectF.top.toInt(), rectF.right.toInt(), rectF.bottom.toInt())
+        val rect =
+            Rect(rectF.left.toInt(), rectF.top.toInt(), rectF.right.toInt(), rectF.bottom.toInt())
         clickableRegion.setPath(mHolesPath!!, Region(rect))
         return clickableRegion.contains(touchX, touchY)
     }
@@ -300,10 +303,27 @@ class RNHoleView(context: Context) : ReactViewGroup(context) {
                 }
 
                 siblingEvent.recycle()
+
+                if (shouldBlockTouchPropagation(child)) {
+                    break
+                }
             }
         }
 
         return handled
+    }
+
+    private fun shouldBlockTouchPropagation(view: View): Boolean {
+        val pointerEvents = if (view is ReactPointerEventsView) {
+            view.pointerEvents
+        } else {
+            PointerEvents.AUTO
+        }
+
+        return when (pointerEvents) {
+            PointerEvents.AUTO, PointerEvents.BOX_ONLY -> true
+            PointerEvents.NONE, PointerEvents.BOX_NONE -> false
+        }
     }
 
     private fun dispatchReactTouchEvent(ev: MotionEvent, targetView: View) {
