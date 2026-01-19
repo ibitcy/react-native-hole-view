@@ -213,3 +213,23 @@ please use version 2.0.*
   5. `pod install`
   6. `cd ..`
   7. `yarn run android` or `yarn run ios`
+
+## Running the web example:
+
+The `exampleWeb` app demonstrates the React Native Web implementation of `RNHoleView`.
+
+### Using Yarn
+
+1. `cd exampleWeb`
+2. `yarn install` (or `yarn`)
+3. `yarn dev`
+4. Open the printed Vite URL (defaults to http://localhost:5174) to interact with the overlay demo.
+
+### Using npm
+
+1. `cd exampleWeb`
+2. `npm install`
+3. `npm run dev`
+4. Open the printed Vite URL (defaults to http://localhost:5174) to interact with the overlay demo.
+
+For more details, see the [exampleWeb README](exampleWeb/README.md).
