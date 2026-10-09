@@ -4,10 +4,10 @@ export const DEFAULT_DURATION = 1000;
 export const DEFAULT_RADIUS_VALUE = -1;
 
 export class RNHole {
-    height: number;
-    width: number;
-    x: number;
-    y: number;
+    height: number = 0;
+    width: number = 0;
+    x: number = 0;
+    y: number = 0;
     borderRadius?: number = DEFAULT_RADIUS_VALUE;
     isRTL? = false;
     borderTopLeftRadius? = DEFAULT_RADIUS_VALUE;
